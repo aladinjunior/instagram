@@ -6,61 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".login.view.LoginActivity">
 
-    <LinearLayout
-        android:id="@+id/login_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/instagram_logo_black" />
-
-        <EditText
-            android:id="@+id/login_edit_text_email"
-            style="@style/Theme.Instagram.EditTextStyle"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/login_edit_text_password"
-            style="@style/Theme.Instagram.EditTextStyle"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/login_bttn_enter"
-            style="@style/Theme.Instagram.ButtonStyle"
-            android:enabled="false"
-            android:text="@string/enter" />
-
-        <FrameLayout
-            style="@style/Theme.Instagram.ContainerForm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="@color/gray_border" />
-
-            <TextView
-                style="@style/Theme.Instagram.TextViewBase"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:padding="8dp"
-                android:text="@string/or" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
+    <include layout="@layout/container_login"/>
+    
     <View
         app:layout_constraintBottom_toTopOf="@id/login_txt_register"
         android:layout_width="match_parent"
