@@ -11,9 +11,7 @@
     
     <View
         app:layout_constraintBottom_toTopOf="@id/login_txt_register"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_border" />
+        style="@style/Theme.Instagram.LineViewBase" />
 
     <TextView
         android:id="@+id/login_txt_register"

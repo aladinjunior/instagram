@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:src="@drawable/photo_icon"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_input_email"
+                style="@style/Theme.Instagram.TextInputLayoutStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/register_edit_text_email"
+                    style="@style/Theme.Instagram.EditTextStyle"
+                    android:hint="@string/email"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <co.aladinjunior.instagram.login.view.LoadingButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/next"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        style="@style/Theme.Instagram.LineViewBase"
+        android:layout_above="@id/register_text_login"/>
+
+    <TextView
+        android:id="@+id/register_text_login"
+        style="@style/Theme.Instagram.TextViewBase"
+        android:text="@string/does_not_have_account"
+        android:layout_alignParentBottom="true"
+        android:padding="26dp"
+        android:textAlignment="center"/>
+
+
+
+
+
+</RelativeLayout>
