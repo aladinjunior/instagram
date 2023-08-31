@@ -35,7 +35,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Theme.Instagram.TextInputLayoutStyle"
-        android:id="@+id/login_input_password">
+        android:id="@+id/login_input_password"
+        app:hintEnabled="false">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/login_edit_text_password"
@@ -44,11 +45,11 @@
         android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <co.aladinjunior.instagram.login.view.LoadingButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/login_bttn_enter"
-        style="@style/Theme.Instagram.ButtonStyle"
-        android:enabled="false"
-        android:text="@string/enter" />
+        app:text="@string/enter" />
 
     <FrameLayout
         style="@style/Theme.Instagram.ContainerForm"

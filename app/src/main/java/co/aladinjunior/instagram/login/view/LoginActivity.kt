@@ -2,10 +2,13 @@ package co.aladinjunior.instagram.login.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import co.aladinjunior.instagram.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -23,11 +26,22 @@ class LoginActivity : AppCompatActivity() {
         inputEmailLogin.addTextChangedListener(watcher)
         inputPasswordLogin.addTextChangedListener(watcher)
 
-        findViewById<Button>(R.id.login_bttn_enter).setOnClickListener {
-            findViewById<TextInputLayout>(R.id.login_input_email).error = "Este e-mail é inválido!"
-            findViewById<TextInputLayout>(R.id.login_input_password).error =
-                "Esta senha é inválida!"
-        }
+        val button = findViewById<LoadingButton>(R.id.login_bttn_enter)
+            button.setOnClickListener {
+                button.showProgress(true)
+
+                findViewById<TextInputLayout>(R.id.login_input_email)
+                    .error = "Este e-mail é inválido"
+                findViewById<TextInputLayout>(R.id.login_input_password)
+                    .error = "Esta senha é inválida"
+                Handler(Looper.getMainLooper()).postDelayed({
+                    button.showProgress(false)
+                },2000)
+
+            }
+
+
+
 
     }
 
@@ -36,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            findViewById<Button>(R.id.login_bttn_enter).isEnabled = s.toString().isNotEmpty()
+            findViewById<LoadingButton>(R.id.login_bttn_enter).isEnabled = s.toString().isNotEmpty()
         }
 
         override fun afterTextChanged(s: Editable?) {
