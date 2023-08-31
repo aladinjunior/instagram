@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingVertical="70dp"
+                android:text="@string/welcome_to_instagram"
+                style="@style/Theme.Instagram.TextViewBase.Form"/>
+
+            <co.aladinjunior.instagram.login.view.LoadingButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/next" />
+
+        </LinearLayout>
+
+
+    <View
+        style="@style/Theme.Instagram.LineViewBase"
+        android:layout_above="@id/register_text_terms"/>
+
+    <TextView
+        android:id="@+id/register_text_terms"
+        style="@style/Theme.Instagram.TextViewBase"
+        android:text="@string/agree_terms_policy"
+        android:layout_alignParentBottom="true"
+        android:padding="26dp"
+        android:textAlignment="center"/>
+
+
+
+
+
+</RelativeLayout>

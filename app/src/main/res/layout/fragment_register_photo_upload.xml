@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:contentDescription="@null"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/photo_icon" />
+
+    <TextView
+        android:text="@string/photo_register_title"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        style="@style/Theme.Instagram.TextViewBase.Form"/>
+
+    <TextView
+        android:text="@string/photo_register_subtitle"
+        android:textColor="@color/black"
+        style="@style/Theme.Instagram.TextViewBase.Form"/>
+
+    <co.aladinjunior.instagram.login.view.LoadingButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:text="@string/next" />
+
+
+</LinearLayout>

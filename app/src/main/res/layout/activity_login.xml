@@ -10,6 +10,8 @@
     <include layout="@layout/container_login"/>
     
     <View
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/login_txt_register"
         style="@style/Theme.Instagram.LineViewBase" />
 
