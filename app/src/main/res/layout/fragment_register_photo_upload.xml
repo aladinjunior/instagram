@@ -29,7 +29,14 @@
     <co.aladinjunior.instagram.login.view.LoadingButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:text="@string/next" />
+        app:text="@string/add_photo" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/jump"
+        android:textColor="@color/blue_enabled"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
 
 </LinearLayout>
