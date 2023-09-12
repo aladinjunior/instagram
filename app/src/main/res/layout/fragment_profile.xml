@@ -120,6 +120,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/top_nav_background"
             app:labelVisibilityMode="unlabeled"
+            app:itemIconTint="@color/black"
             app:layout_constraintTop_toBottomOf="@id/profile_text_bio"
             app:menu="@menu/menu_top_navigation" />
 
