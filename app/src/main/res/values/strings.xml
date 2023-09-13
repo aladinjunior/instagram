@@ -42,5 +42,7 @@
     <string name="logout">Deseja sair?</string>
     <string name="logout_action">Sair</string>
     <string name="cancel">Cancel</string>
+    <string name="invalid_password">Senha inválida</string>
+    <string name="nothing">" "</string>
 
 </resources>

@@ -1,16 +1,24 @@
 package co.aladinjunior.instagram.login
 
 import androidx.annotation.StringRes
+import co.aladinjunior.instagram.custom.base.PresenterBase
+import co.aladinjunior.instagram.custom.base.ViewBase
 
 interface Login {
 
-    interface View{
+    interface View : ViewBase<Presenter>{
 
         fun displayProgress(enabled: Boolean)
-        fun displayInvalidEmail(@StringRes message: Int)
-        fun displayInvalidPassword(@StringRes message: Int)
+        fun displayInvalidEmail(@StringRes message: Int?)
+        fun displayInvalidPassword(@StringRes message: Int?)
         fun authenticateUser()
         fun cantAuthenticateUser(@StringRes message: Int)
+
+    }
+
+    interface Presenter : PresenterBase{
+
+        fun login(email: String, password: String)
 
     }
 

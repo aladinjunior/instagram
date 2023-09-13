@@ -1,9 +1,9 @@
-package co.aladinjunior.instagram.custom.view.util
+package co.aladinjunior.instagram.custom.util
 
 import android.text.Editable
 import android.text.TextWatcher
 
-class CustomWatcher(private val function : (String) -> Unit) : TextWatcher {
+class CustomTextWatcher(private val function : (String) -> Unit) : TextWatcher {
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
     }
 
