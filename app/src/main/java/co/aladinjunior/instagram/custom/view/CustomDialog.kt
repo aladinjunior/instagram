@@ -18,8 +18,6 @@ class CustomDialog(context: Context) : Dialog(context) {
         super.onCreate(savedInstanceState)
         binding = DialogCustomBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
     }
 
 

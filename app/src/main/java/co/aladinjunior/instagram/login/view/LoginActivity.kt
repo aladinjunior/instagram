@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import co.aladinjunior.instagram.custom.view.util.CustomWatcher
 import co.aladinjunior.instagram.databinding.ActivityLoginBinding
 
 
@@ -41,17 +42,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private val watcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            binding.loginBttnEnter.isEnabled = s.toString().isNotEmpty()
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-        }
-
+    private val watcher = CustomWatcher {
+        binding.loginBttnEnter.isEnabled = it.isNotEmpty()
     }
 
 
