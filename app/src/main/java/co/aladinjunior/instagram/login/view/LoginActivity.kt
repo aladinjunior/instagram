@@ -6,11 +6,13 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import co.aladinjunior.instagram.custom.view.util.CustomWatcher
 import co.aladinjunior.instagram.databinding.ActivityLoginBinding
+import co.aladinjunior.instagram.login.Login
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), Login.View{
 
     private lateinit var binding: ActivityLoginBinding
 
@@ -28,9 +30,9 @@ class LoginActivity : AppCompatActivity() {
 
 
             loginBttnEnter.setOnClickListener {
-                loginBttnEnter.showProgress(true)
+                
 
-                loginInputEmail.error = "Este e-mail é inválido"
+
                 loginInputPassword.error = "Esta senha é inválida"
                 Handler(Looper.getMainLooper()).postDelayed({
                     loginBttnEnter.showProgress(false)
@@ -42,8 +44,29 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private val watcher = CustomWatcher {
-        binding.loginBttnEnter.isEnabled = it.isNotEmpty()
+
+    private val watcher = CustomWatcher{
+       binding.loginBttnEnter.isEnabled = it.isNotEmpty()
+    }
+
+    override fun displayProgress(enabled: Boolean) {
+        binding.loginBttnEnter.showProgress(enabled)
+    }
+
+    override fun displayInvalidEmail(message: Int) {
+        binding.loginInputEmail.error = getString(message)
+    }
+
+    override fun displayInvalidPassword(message: Int) {
+        binding.loginInputPassword.error = getString(message)
+    }
+
+    override fun authenticateUser() {
+        //GO TO NEXT SCREEN
+    }
+
+    override fun cantAuthenticateUser(message: Int) {
+        //DISPLAY USER NOT FOUND
     }
 
 
