@@ -1,5 +1,6 @@
 package co.aladinjunior.instagram.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -9,7 +10,11 @@ import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentRegisterEmailBinding
 import co.aladinjunior.instagram.register.RegisterEmail
 
-class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), RegisterEmail.View {
+class RegisterEmailFragment(
+    private var fragmentAttachListener: FragmentAttachListener? = null) : Fragment(R.layout.fragment_register_email), RegisterEmail.View
+{
+
+
     private var binding: FragmentRegisterEmailBinding? = null
     override lateinit var presenter: RegisterEmail.Presenter
 
@@ -54,11 +59,21 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
         binding?.registerInputEmail?.error = message
     }
 
-    override fun goToNamePasswordScreen() {
+    override fun goToNamePasswordScreen(email: String) {
+        fragmentAttachListener?.goToNamePasswordScreen(email)
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
     }
 
     override fun onDestroy() {
         binding = null
+        fragmentAttachListener = null
         super.onDestroy()
     }
 
