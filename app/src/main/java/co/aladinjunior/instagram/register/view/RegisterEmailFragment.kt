@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.util.CustomTextWatcher
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentRegisterEmailBinding
 import co.aladinjunior.instagram.register.Register
@@ -18,24 +19,35 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterEmailBinding.bind(view)
 
+        presenter = DependencyInjector.registerPresenter(this)
 
-        binding?.registerBttnNext?.setOnClickListener {
 
+        binding?.let {
+           with(it){
+               registerEditTextEmail.addTextChangedListener(watcher)
+               registerEditTextEmail.addTextChangedListener(CustomTextWatcher{
+                   displayInvalidEmail(null)
+               })
+               registerTextLogin.setOnClickListener {
+                   activity?.finish()
+               }
 
+               registerBttnNext.setOnClickListener {
+                   presenter.registrate(registerEditTextEmail.text.toString())
+               }
+           }
         }
-
     }
-    override fun displayProgress(enabled: Boolean) {
-        binding?.registerBttnNext?.showProgress(enabled)
+
+    private val watcher = CustomTextWatcher {
+        binding?.registerBttnNext?.isEnabled = binding?.registerEditTextEmail?.text.toString().isNotEmpty()
     }
 
     override fun displayInvalidEmail(message: Int?) {
         binding?.registerInputEmail?.error = message?.let { getString(message) }
     }
 
-    override fun cadastrateEmail(email: String) {
-       // GO TO NEXT SCREEN
-    }
+
 
     override fun onDestroy() {
         binding = null
