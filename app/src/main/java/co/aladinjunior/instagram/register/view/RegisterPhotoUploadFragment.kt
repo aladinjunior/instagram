@@ -15,8 +15,7 @@ class RegisterPhotoUploadFragment : Fragment(R.layout.fragment_register_photo_up
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentRegisterPhotoUploadBinding.inflate(layoutInflater)
+        binding = FragmentRegisterPhotoUploadBinding.bind(view)
 
         val customDialog = CustomDialog(requireContext())
         customDialog.addButtons(R.string.photo, R.string.gallery) {button ->

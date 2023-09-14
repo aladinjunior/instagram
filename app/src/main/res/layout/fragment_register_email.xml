@@ -24,6 +24,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_input_email"
+                app:hintEnabled="false"
                 style="@style/Theme.Instagram.TextInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -34,6 +35,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <co.aladinjunior.instagram.login.view.LoadingButton
+                android:id="@+id/register_bttn_next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/next"/>
