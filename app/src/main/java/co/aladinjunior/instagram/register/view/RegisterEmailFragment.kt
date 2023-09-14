@@ -1,25 +1,23 @@
 package co.aladinjunior.instagram.register.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.util.CustomTextWatcher
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentRegisterEmailBinding
-import co.aladinjunior.instagram.register.Register
+import co.aladinjunior.instagram.register.RegisterEmail
 
-class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Register.View {
+class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), RegisterEmail.View {
     private var binding: FragmentRegisterEmailBinding? = null
-    override lateinit var presenter: Register.Presenter
+    override lateinit var presenter: RegisterEmail.Presenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterEmailBinding.bind(view)
 
-        presenter = DependencyInjector.registerPresenter(this)
+        presenter = DependencyInjector.registerEmailPresenter(this, DependencyInjector.registerEmailRepository())
 
 
         binding?.let {
@@ -39,15 +37,25 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
         }
     }
 
+    override fun displayProgress(enabled: Boolean) {
+        binding?.registerBttnNext?.showProgress(enabled)
+    }
+
     private val watcher = CustomTextWatcher {
         binding?.registerBttnNext?.isEnabled = binding?.registerEditTextEmail?.text.toString().isNotEmpty()
     }
 
     override fun displayInvalidEmail(message: Int?) {
         binding?.registerInputEmail?.error = message?.let { getString(message) }
+
     }
 
+    override fun onEmailFailure(message: String) {
+        binding?.registerInputEmail?.error = message
+    }
 
+    override fun goToNamePasswordScreen() {
+    }
 
     override fun onDestroy() {
         binding = null

@@ -44,5 +44,6 @@
     <string name="cancel">Cancel</string>
     <string name="invalid_password">Senha inválida</string>
     <string name="nothing">" "</string>
+    <string name="existent_user">usuário existente</string>
 
 </resources>

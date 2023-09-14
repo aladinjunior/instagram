@@ -8,9 +8,6 @@ import co.aladinjunior.instagram.commom.util.CustomTextWatcher
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.ActivityLoginBinding
 import co.aladinjunior.instagram.login.Login
-import co.aladinjunior.instagram.login.data.FakeRequest
-import co.aladinjunior.instagram.login.data.LoginRepository
-import co.aladinjunior.instagram.login.presentation.LoginPresenter
 import co.aladinjunior.instagram.main.view.MainActivity
 import co.aladinjunior.instagram.register.view.RegisterActivity
 

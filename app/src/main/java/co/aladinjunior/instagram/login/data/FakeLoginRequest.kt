@@ -5,7 +5,7 @@ import android.os.Looper
 import co.aladinjunior.instagram.commom.model.Database
 
 
-class FakeRequest : LoginDataSource {
+class FakeLoginRequest : LoginDataSource {
 
     override fun login(email: String, password: String, callback: LoginCallback) {
 
