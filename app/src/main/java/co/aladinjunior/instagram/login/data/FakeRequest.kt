@@ -8,15 +8,12 @@ class FakeRequest : LoginDataSource {
 
     override fun login(email: String, password: String, callback: LoginCallback) {
 
-        if (email == "a@a.com" && password == "12345678"){
-            callback.onSuccess()
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (email == "a@a.com" && password == "12345678") callback.onSuccess()
+            else callback.onFailure("usuário não encontrado")
             callback.onComplete()
-        }
-        else{
-            Handler(Looper.getMainLooper()).postDelayed({
-                callback.onFailure("usuário não encontrado")
-                callback.onComplete()
-            }, 2000)
-        }
+        }, 2000)
+
+
     }
 }
