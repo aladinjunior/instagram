@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/register_fragment_email"
-        android:name="co.aladinjunior.instagram.register.view.RegisterPhotoUploadFragment"
+    <FrameLayout
+        android:id="@+id/fragment_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_register_email"/>

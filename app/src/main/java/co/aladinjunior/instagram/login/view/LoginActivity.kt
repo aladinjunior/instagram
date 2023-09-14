@@ -12,6 +12,7 @@ import co.aladinjunior.instagram.login.data.FakeRequest
 import co.aladinjunior.instagram.login.data.LoginRepository
 import co.aladinjunior.instagram.login.presentation.LoginPresenter
 import co.aladinjunior.instagram.main.view.MainActivity
+import co.aladinjunior.instagram.register.view.RegisterActivity
 
 
 class LoginActivity : AppCompatActivity(), Login.View {
@@ -49,8 +50,13 @@ class LoginActivity : AppCompatActivity(), Login.View {
                     loginEditTextPassword.text.toString()
                 )
 
-
             }
+
+            loginTxtRegister.setOnClickListener {
+                val i = Intent(this@LoginActivity, RegisterActivity::class.java)
+                startActivity(i)
+            }
+
         }
 
 
