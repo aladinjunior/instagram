@@ -1,4 +1,4 @@
-package co.aladinjunior.instagram.custom.view
+package co.aladinjunior.instagram.commom.view
 
 import android.app.Dialog
 import android.content.Context
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.databinding.DialogCustomBinding
 
 class CustomDialog(context: Context) : Dialog(context) {

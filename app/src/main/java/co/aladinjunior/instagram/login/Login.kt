@@ -1,8 +1,8 @@
 package co.aladinjunior.instagram.login
 
 import androidx.annotation.StringRes
-import co.aladinjunior.instagram.custom.base.PresenterBase
-import co.aladinjunior.instagram.custom.base.ViewBase
+import co.aladinjunior.instagram.commom.base.PresenterBase
+import co.aladinjunior.instagram.commom.base.ViewBase
 
 interface Login {
 

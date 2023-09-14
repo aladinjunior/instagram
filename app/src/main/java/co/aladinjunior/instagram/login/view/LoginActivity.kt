@@ -4,7 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import co.aladinjunior.instagram.custom.util.CustomTextWatcher
+import co.aladinjunior.instagram.commom.util.CustomTextWatcher
+import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.ActivityLoginBinding
 import co.aladinjunior.instagram.login.Login
 import co.aladinjunior.instagram.login.data.FakeRequest
@@ -23,8 +24,11 @@ class LoginActivity : AppCompatActivity(), Login.View {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = LoginRepository(FakeRequest())
-        presenter = LoginPresenter(this, repository)
+
+
+        presenter = DependencyInjector.loginPresenter(this, DependencyInjector.loginRepository())
+
+
 
 
 
@@ -75,7 +79,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun authenticateUser() {
         val i = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(i)
     }
 

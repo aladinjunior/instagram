@@ -2,12 +2,10 @@ package co.aladinjunior.instagram.register.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.custom.view.CustomDialog
+import co.aladinjunior.instagram.commom.view.CustomDialog
 import co.aladinjunior.instagram.databinding.FragmentRegisterPhotoUploadBinding
 
 class RegisterPhotoUploadFragment : Fragment(R.layout.fragment_register_photo_upload) {

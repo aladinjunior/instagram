@@ -1,4 +1,4 @@
-package co.aladinjunior.instagram.custom.util
+package co.aladinjunior.instagram.commom.util
 
 import android.text.Editable
 import android.text.TextWatcher
