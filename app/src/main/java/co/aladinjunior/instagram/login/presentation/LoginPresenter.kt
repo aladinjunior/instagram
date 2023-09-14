@@ -2,6 +2,7 @@ package co.aladinjunior.instagram.login.presentation
 
 import android.util.Patterns
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.login.Login
 import co.aladinjunior.instagram.login.data.LoginCallback
 import co.aladinjunior.instagram.login.data.LoginRepository
@@ -24,7 +25,7 @@ class LoginPresenter(
         if (isEmailValid && isPasswordValid){
             view?.displayProgress(true)
             repository.login(email, password, object : LoginCallback{
-                override fun onSuccess() {
+                override fun onSuccess(userAuth: UserAuth) {
                     view?.authenticateUser()
                 }
 
