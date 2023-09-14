@@ -12,7 +12,7 @@ interface Login {
         fun displayInvalidEmail(@StringRes message: Int?)
         fun displayInvalidPassword(@StringRes message: Int?)
         fun authenticateUser()
-        fun cantAuthenticateUser(@StringRes message: Int)
+        fun cantAuthenticateUser(message: String)
 
     }
 

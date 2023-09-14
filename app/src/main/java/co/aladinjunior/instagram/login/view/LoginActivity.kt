@@ -1,14 +1,19 @@
 package co.aladinjunior.instagram.login.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import co.aladinjunior.instagram.custom.util.CustomTextWatcher
 import co.aladinjunior.instagram.databinding.ActivityLoginBinding
 import co.aladinjunior.instagram.login.Login
+import co.aladinjunior.instagram.login.data.FakeRequest
+import co.aladinjunior.instagram.login.data.LoginRepository
 import co.aladinjunior.instagram.login.presentation.LoginPresenter
+import co.aladinjunior.instagram.main.view.MainActivity
 
 
-class LoginActivity : AppCompatActivity(), Login.View{
+class LoginActivity : AppCompatActivity(), Login.View {
 
     private lateinit var binding: ActivityLoginBinding
     override lateinit var presenter: Login.Presenter
@@ -18,22 +23,27 @@ class LoginActivity : AppCompatActivity(), Login.View{
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = LoginPresenter(this)
+        val repository = LoginRepository(FakeRequest())
+        presenter = LoginPresenter(this, repository)
+
 
 
         with(binding) {
             loginEditTextEmail.addTextChangedListener(watcher)
-            loginEditTextEmail.addTextChangedListener(CustomTextWatcher{
-               displayInvalidEmail(null)
+            loginEditTextEmail.addTextChangedListener(CustomTextWatcher {
+                displayInvalidEmail(null)
             })
             loginEditTextPassword.addTextChangedListener(watcher)
-            loginEditTextPassword.addTextChangedListener(CustomTextWatcher{
+            loginEditTextPassword.addTextChangedListener(CustomTextWatcher {
                 displayInvalidPassword(null)
             })
 
 
             loginBttnEnter.setOnClickListener {
-                    presenter.login(loginEditTextEmail.text.toString(), loginEditTextPassword.text.toString())
+                presenter.login(
+                    loginEditTextEmail.text.toString(),
+                    loginEditTextPassword.text.toString()
+                )
 
 
             }
@@ -43,9 +53,9 @@ class LoginActivity : AppCompatActivity(), Login.View{
     }
 
 
-    private val watcher = CustomTextWatcher{
-       binding.loginBttnEnter.isEnabled = binding.loginEditTextEmail.text.toString().isNotEmpty()
-               && binding.loginEditTextPassword.text.toString().isNotEmpty()
+    private val watcher = CustomTextWatcher {
+        binding.loginBttnEnter.isEnabled = binding.loginEditTextEmail.text.toString().isNotEmpty()
+                && binding.loginEditTextPassword.text.toString().isNotEmpty()
     }
 
     override fun displayProgress(enabled: Boolean) {
@@ -64,11 +74,11 @@ class LoginActivity : AppCompatActivity(), Login.View{
     }
 
     override fun authenticateUser() {
-        //GO TO NEXT SCREEN
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
-    override fun cantAuthenticateUser(message: Int) {
-        //DISPLAY USER NOT FOUND
+    override fun cantAuthenticateUser(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {
