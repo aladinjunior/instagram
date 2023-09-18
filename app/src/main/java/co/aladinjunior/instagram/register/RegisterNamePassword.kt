@@ -12,7 +12,7 @@ interface RegisterNamePassword {
         fun displayInvalidPassword(@StringRes message: Int?)
         fun displayUnmatchPassword(@StringRes message: Int?)
         fun displayExistentUser(message: String)
-        fun goToWelcomeScreen()
+        fun goToWelcomeScreen(name: String)
     }
 
     interface Presenter : PresenterBase{

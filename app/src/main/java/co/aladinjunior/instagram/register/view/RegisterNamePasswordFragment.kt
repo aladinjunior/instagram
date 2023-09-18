@@ -1,5 +1,6 @@
 package co.aladinjunior.instagram.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,9 @@ import co.aladinjunior.instagram.databinding.FragmentRegisterNamePasswordBinding
 import co.aladinjunior.instagram.register.RegisterNamePassword
 import java.lang.IllegalArgumentException
 
-class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_password),
-    RegisterNamePassword.View{
+class RegisterNamePasswordFragment(var fragmentAttachListener: FragmentAttachListener? = null) :
+    Fragment(R.layout.fragment_register_name_password),
+    RegisterNamePassword.View {
 
     private var binding: FragmentRegisterNamePasswordBinding? = null
     override lateinit var presenter: RegisterNamePassword.Presenter
@@ -25,53 +27,52 @@ class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_pa
         binding = FragmentRegisterNamePasswordBinding.bind(view)
         val repository = DependencyInjector.registerRepository()
         presenter = DependencyInjector.registerNamePasswordPresenter(this, repository)
-        val email = arguments?.getString(KEY_EMAIL) ?: throw IllegalArgumentException("email nao pode ser vazio")
+        val email = arguments?.getString(KEY_EMAIL)
+            ?: throw IllegalArgumentException("email nao pode ser vazio")
         Toast.makeText(requireContext(), email, Toast.LENGTH_SHORT).show()
 
 
 
         binding?.let {
-            with(it){
-
-
+            with(it) {
                 registerEditTextName.addTextChangedListener(watcher)
-                registerEditTextName.addTextChangedListener(CustomTextWatcher{
+                registerEditTextName.addTextChangedListener(CustomTextWatcher {
                     registerInputName.error = null
                 })
                 registerEditTextPassword.addTextChangedListener(watcher)
-                registerEditTextPassword.addTextChangedListener(CustomTextWatcher{
+                registerEditTextPassword.addTextChangedListener(CustomTextWatcher {
                     registerInputPassword.error = null
                 })
                 registerEditTextConfirmPassword.addTextChangedListener(watcher)
-                registerEditTextConfirmPassword.addTextChangedListener(CustomTextWatcher{
+                registerEditTextConfirmPassword.addTextChangedListener(CustomTextWatcher {
                     registerInputConfirmPassword.error = null
                 })
-
+                registerTextLogin.setOnClickListener {
+                    activity?.finish()
+                }
                 registerBttnNext.setOnClickListener {
                     presenter.create(
                         email,
                         registerEditTextName.text.toString(),
                         registerEditTextPassword.text.toString(),
-                        registerEditTextConfirmPassword.text.toString())
+                        registerEditTextConfirmPassword.text.toString()
+                    )
                 }
-
-
-
 
             }
         }
 
     }
 
-    val watcher = CustomTextWatcher{
-        binding?.registerBttnNext?.isEnabled = binding?.registerEditTextName?.text.toString().isNotEmpty()
-                && binding?.registerEditTextPassword?.text.toString().isNotEmpty()
-                && binding?.registerEditTextConfirmPassword?.text.toString().isNotEmpty()
+    val watcher = CustomTextWatcher {
+        binding?.registerBttnNext?.isEnabled =
+            binding?.registerEditTextName?.text.toString().isNotEmpty()
+                    && binding?.registerEditTextPassword?.text.toString().isNotEmpty()
+                    && binding?.registerEditTextConfirmPassword?.text.toString().isNotEmpty()
     }
 
 
-
-    companion object{
+    companion object {
         const val KEY_EMAIL = "key_email"
     }
 
@@ -95,8 +96,15 @@ class RegisterNamePasswordFragment : Fragment(R.layout.fragment_register_name_pa
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun goToWelcomeScreen() {
-        //TODO: IR PARA TELA DE BEM VINDO
+    override fun goToWelcomeScreen(name: String) {
+        fragmentAttachListener?.goToWelcomeScreen(name)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentAttachListener){
+            fragmentAttachListener = context
+        }
     }
 
     override fun onDestroy() {

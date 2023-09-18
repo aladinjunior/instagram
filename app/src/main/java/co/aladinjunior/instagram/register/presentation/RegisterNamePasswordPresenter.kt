@@ -5,10 +5,10 @@ import co.aladinjunior.instagram.register.RegisterNamePassword
 import co.aladinjunior.instagram.register.data.RegisterCallback
 import co.aladinjunior.instagram.register.data.RegisterRepository
 
-class RegisterNamePasswordPresenter(var view: RegisterNamePassword.View? = null,
-
-                                    val repository: RegisterRepository) :
-    RegisterNamePassword.Presenter {
+class RegisterNamePasswordPresenter(
+    var view: RegisterNamePassword.View? = null,
+    val repository: RegisterRepository
+) : RegisterNamePassword.Presenter {
 
 
     override fun create(email: String, name: String, password: String, confirmPassword: String) {
@@ -20,11 +20,11 @@ class RegisterNamePasswordPresenter(var view: RegisterNamePassword.View? = null,
         if (!isValidPassword) view?.displayInvalidPassword(R.string.invalid_password)
         if (!isValidConfirmPassword) view?.displayUnmatchPassword(R.string.password_not_equal)
 
-        if (isValidName && isValidPassword && isValidConfirmPassword){
+        if (isValidName && isValidPassword && isValidConfirmPassword) {
             view?.displayProgress(true)
-            repository.registrate(email, name, password, object : RegisterCallback{
+            repository.registrate(email, name, password, object : RegisterCallback {
                 override fun onSuccess() {
-                    view?.goToWelcomeScreen()
+                    view?.goToWelcomeScreen(name)
                 }
 
                 override fun onFailure(message: String) {
