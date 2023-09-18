@@ -45,5 +45,6 @@
     <string name="invalid_password">Senha inválida</string>
     <string name="nothing">" "</string>
     <string name="existent_user">usuário existente</string>
+    <string name="invalid_name">Nome precisa ter mais de 3 caracteres</string>
 
 </resources>

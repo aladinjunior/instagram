@@ -5,7 +5,6 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.util.CustomTextWatcher
@@ -25,7 +24,7 @@ class RegisterEmailFragment(private var fragmentAttachListener: FragmentAttachLi
 
         presenter = DependencyInjector.registerEmailPresenter(
             this,
-            DependencyInjector.registerEmailRepository()
+            DependencyInjector.registerRepository()
         )
 
 

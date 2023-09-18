@@ -2,13 +2,12 @@ package co.aladinjunior.instagram.register.presentation
 
 import android.util.Patterns
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.commom.model.Database
 import co.aladinjunior.instagram.register.RegisterEmail
-import co.aladinjunior.instagram.register.data.RegisterEmailCallback
-import co.aladinjunior.instagram.register.data.RegisterEmailRepository
+import co.aladinjunior.instagram.register.data.RegisterCallback
+import co.aladinjunior.instagram.register.data.RegisterRepository
 
 class RegisterEmailPresenter(private var view: RegisterEmail.View?,
-                             private var repository: RegisterEmailRepository) : RegisterEmail.Presenter {
+                             private val repository: RegisterRepository) : RegisterEmail.Presenter {
 
     override fun registrate(email: String) {
         val isValidEmail = Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -16,7 +15,7 @@ class RegisterEmailPresenter(private var view: RegisterEmail.View?,
 
         else{
             view?.displayProgress(true)
-            repository.registrate(email, object : RegisterEmailCallback{
+            repository.registrate(email, object : RegisterCallback{
                 override fun onSuccess() {
                     view?.goToNamePasswordScreen(email)
                 }
