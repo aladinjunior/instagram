@@ -1,10 +1,12 @@
 package co.aladinjunior.instagram.register.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.databinding.ActivityRegisterBinding
+import co.aladinjunior.instagram.main.view.MainActivity
 import co.aladinjunior.instagram.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
 import co.aladinjunior.instagram.register.view.RegisterWelcomeFragment.Companion.KEY_NAME
 
@@ -30,6 +32,12 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener{
         fragment.arguments = args
         fragmentManager(fragment)
 
+    }
+
+    override fun goToMainScreen() {
+        val i = Intent(this, MainActivity::class.java)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(i)
     }
 
     override fun goToWelcomeScreen(name: String) {
