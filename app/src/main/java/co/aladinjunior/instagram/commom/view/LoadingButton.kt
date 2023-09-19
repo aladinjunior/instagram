@@ -1,4 +1,4 @@
-package co.aladinjunior.instagram.login.view
+package co.aladinjunior.instagram.commom.view
 
 import android.content.Context
 import android.content.res.TypedArray

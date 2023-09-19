@@ -1,12 +1,16 @@
 package co.aladinjunior.instagram.register.view
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.view.CustomDialog
+import co.aladinjunior.instagram.commom.view.ImageCropperFragment.Companion.KEY_URI
 import co.aladinjunior.instagram.databinding.FragmentRegisterPhotoUploadBinding
 
 class RegisterPhotoUploadFragment(
@@ -14,6 +18,15 @@ class RegisterPhotoUploadFragment(
 ) : Fragment(R.layout.fragment_register_photo_upload) {
 
     private var binding: FragmentRegisterPhotoUploadBinding? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("croppedImage"){requestKey, bundle ->
+            val uri = bundle.getParcelable<Uri>(KEY_URI)
+            setProfileImage(uri)
+        }
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +57,10 @@ class RegisterPhotoUploadFragment(
             }
         }
         customDialog.show()
+    }
+
+    private fun setProfileImage(uri: Uri?){
+        binding?.registerImgPhoto?.setImageURI(uri)
     }
 
     override fun onAttach(context: Context) {

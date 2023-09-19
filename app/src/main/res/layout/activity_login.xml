@@ -52,7 +52,7 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <co.aladinjunior.instagram.login.view.LoadingButton
+            <co.aladinjunior.instagram.commom.view.LoadingButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_bttn_enter"

@@ -8,6 +8,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.view.ImageCropperFragment
+import co.aladinjunior.instagram.commom.view.ImageCropperFragment.Companion.KEY_URI
 import co.aladinjunior.instagram.databinding.ActivityRegisterBinding
 import co.aladinjunior.instagram.main.view.MainActivity
 import co.aladinjunior.instagram.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
@@ -44,7 +46,11 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener{
     }
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {uri: Uri? ->
-        Log.i("log", uri.toString())
+        val args = Bundle()
+        args.putParcelable(KEY_URI, uri)
+        val fragment = ImageCropperFragment()
+        fragment.arguments = args
+        fragmentManager(fragment)
     }
 
 
