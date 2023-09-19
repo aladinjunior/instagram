@@ -5,5 +5,6 @@ interface FragmentAttachListener {
     fun goToWelcomeScreen(name: String)
     fun goToPhotoUploadScreen()
     fun openGallery()
+    fun openCamera()
     fun goToMainScreen()
 }

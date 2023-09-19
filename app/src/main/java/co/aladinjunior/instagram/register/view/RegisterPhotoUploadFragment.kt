@@ -52,7 +52,7 @@ class RegisterPhotoUploadFragment(
         val customDialog = CustomDialog(requireContext())
         customDialog.addButtons(R.string.photo, R.string.gallery) { button ->
             when {
-                button.id == R.string.photo -> Log.i("log", "foto")
+                button.id == R.string.photo -> fragmentAttachListener?.openCamera()
                 button.id == R.string.gallery -> fragmentAttachListener?.openGallery()
             }
         }
