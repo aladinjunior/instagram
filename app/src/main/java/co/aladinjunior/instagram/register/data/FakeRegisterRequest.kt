@@ -22,10 +22,10 @@ class FakeRegisterRequest : RegisterDataSource{
         Handler(Looper.getMainLooper()).postDelayed({
             val userAuth = Database.userAuth.firstOrNull { email == it.email }
             if(userAuth == null) {
-                val created = Database.userAuth.add(
-                    UserAuth(UUID.randomUUID().toString(), name, email, password)
-                )
+                val newSession =  UserAuth(UUID.randomUUID().toString(), name, email, password)
+                val created = Database.userAuth.add(newSession)
                 if (created){
+                    Database.userSession = newSession
                     callback.onSuccess()
                 } else callback.onFailure("erro interno")
             } else callback.onFailure("usuário já cadastrado")

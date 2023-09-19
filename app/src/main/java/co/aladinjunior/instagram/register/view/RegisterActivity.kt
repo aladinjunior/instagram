@@ -1,7 +1,10 @@
 package co.aladinjunior.instagram.register.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
@@ -38,6 +41,16 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener{
         val i = Intent(this, MainActivity::class.java)
         i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(i)
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) {uri: Uri? ->
+        Log.i("log", uri.toString())
+    }
+
+
+
+    override fun openGallery() {
+        getContent.launch("image/*")
     }
 
     override fun goToWelcomeScreen(name: String) {

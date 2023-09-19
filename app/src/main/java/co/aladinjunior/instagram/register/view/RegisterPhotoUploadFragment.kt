@@ -23,14 +23,7 @@ class RegisterPhotoUploadFragment(
             with(it) {
                 registerBttnAddPhoto.isEnabled = true
                 registerBttnAddPhoto.setOnClickListener {
-                    val customDialog = CustomDialog(requireContext())
-                    customDialog.addButtons(R.string.photo, R.string.gallery) { button ->
-                        when {
-                            button.id == R.string.photo -> Log.i("log", "foto")
-                            button.id == R.string.gallery -> Log.i("log", "galeria")
-                        }
-                    }
-                    customDialog.show()
+                   openDialog()
                 }
 
                 registerBttnSkip.setOnClickListener {
@@ -42,6 +35,17 @@ class RegisterPhotoUploadFragment(
 
     }
 
+    private fun openDialog(){
+        val customDialog = CustomDialog(requireContext())
+        customDialog.addButtons(R.string.photo, R.string.gallery) { button ->
+            when {
+                button.id == R.string.photo -> Log.i("log", "foto")
+                button.id == R.string.gallery -> fragmentAttachListener?.openGallery()
+            }
+        }
+        customDialog.show()
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is FragmentAttachListener) {
@@ -51,6 +55,7 @@ class RegisterPhotoUploadFragment(
 
     override fun onDestroy() {
         binding = null
+        fragmentAttachListener = null
         super.onDestroy()
     }
 }
