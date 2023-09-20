@@ -14,6 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/main_bottom_nav">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_appbar"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
