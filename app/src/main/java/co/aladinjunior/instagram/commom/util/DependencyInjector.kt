@@ -4,6 +4,10 @@ import co.aladinjunior.instagram.login.Login
 import co.aladinjunior.instagram.login.data.FakeLoginRequest
 import co.aladinjunior.instagram.login.data.LoginRepository
 import co.aladinjunior.instagram.login.presentation.LoginPresenter
+import co.aladinjunior.instagram.profile.Profile
+import co.aladinjunior.instagram.profile.data.FakeProfileRequest
+import co.aladinjunior.instagram.profile.data.ProfileRepository
+import co.aladinjunior.instagram.profile.presentation.ProfilePresenter
 import co.aladinjunior.instagram.register.RegisterEmail
 import co.aladinjunior.instagram.register.RegisterNamePassword
 import co.aladinjunior.instagram.register.RegisterPhotoUpload
@@ -44,5 +48,11 @@ object DependencyInjector {
     }
     fun splashRepository() : SplashRepository{
         return SplashRepository(FakeSplashRequest())
+    }
+    fun profilePresenter(view: Profile.View, repository: ProfileRepository) : Profile.Presenter{
+        return ProfilePresenter(view, repository)
+    }
+    fun profileRepository() : ProfileRepository{
+        return ProfileRepository(FakeProfileRequest())
     }
 }

@@ -28,7 +28,7 @@ abstract class BaseFragment<T, P : BasePresenter>(
         getMenu()?.let {
             setHasOptionsMenu(true)
         }
-        setupPresenter(presenter)
+        setupPresenter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -38,7 +38,7 @@ abstract class BaseFragment<T, P : BasePresenter>(
         }
 
     }
-    abstract fun setupPresenter(presenter: BasePresenter)
+    abstract fun setupPresenter()
 
     override fun onDestroy() {
         binding = null

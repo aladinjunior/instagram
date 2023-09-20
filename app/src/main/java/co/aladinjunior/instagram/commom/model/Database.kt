@@ -5,7 +5,9 @@ import java.util.*
 object Database {
     val userAuth = hashSetOf<UserAuth>()
     val photo = hashSetOf<Photo>()
+    val posts = hashMapOf<String, Set<Photo>>()
     var userSession: UserAuth? = null
+
 
 
     init {

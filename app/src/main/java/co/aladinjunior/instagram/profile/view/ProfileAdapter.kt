@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
 
-    var items: List<Post> = mutableListOf()
+    var items: List<Photo> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder(
@@ -24,7 +25,7 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() 
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return items.size
     }
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){

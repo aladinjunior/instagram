@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
 import co.aladinjunior.instagram.commom.base.BasePresenter
+import co.aladinjunior.instagram.commom.model.Database
+import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
+import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentProfileBinding
 import co.aladinjunior.instagram.profile.Profile
 
@@ -19,8 +22,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     private lateinit var adapter: ProfileAdapter
 
 
-    override fun setupPresenter(presenter: BasePresenter) {
-        //TODO: presenter = profilePresenter(view, repository)
+    override fun setupPresenter() {
+        presenter = DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
     }
 
     override fun setupViews() {
@@ -29,6 +32,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
 
 
+        presenter.fetchUserProfile()
     }
 
     override fun getMenu(): Int {
@@ -37,7 +41,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
 
     override fun displayPosts() {
-        TODO("Not yet implemented")
+        //TODO: GONNA SHOW ALL POSTS
     }
 
     override fun displayUserProfile(userAuth: UserAuth) {
@@ -46,14 +50,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileFollowersCount?.text = userAuth.followersCount.toString()
         binding?.profileTextUsername?.text = userAuth.name
         binding?.profileTextBio?.text = "TODO"
-        presenter.fetchUserProfile()
     }
 
     override fun displayRequestFailure(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    override fun displayFullPosts(posts: List<Post>) {
+    override fun displayFullPosts(posts: List<Photo>) {
+        presenter.fetchUserPosts()
         adapter.items = posts
         adapter.notifyDataSetChanged()
     }
