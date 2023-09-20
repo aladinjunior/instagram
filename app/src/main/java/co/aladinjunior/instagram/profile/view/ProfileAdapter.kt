@@ -1,13 +1,17 @@
 package co.aladinjunior.instagram.profile.view
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.model.Post
 
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
+
+    var items: List<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder(
@@ -16,7 +20,7 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
-        holder.bind(R.drawable.ic_insta_add)
+        holder.bind(items[position].uri)
     }
 
     override fun getItemCount(): Int {
@@ -24,9 +28,9 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() 
     }
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind(image: Int){
+        fun bind(image: Uri){
             itemView.findViewById<ImageView>(R.id.profile_img_photos)
-                .setImageResource(image)
+                .setImageURI(image)
         }
     }
 

@@ -1,5 +1,5 @@
 package co.aladinjunior.instagram.commom.base
 
-interface ViewBase<T> {
+interface BaseView<T> {
     var presenter : T
 }

@@ -1,32 +1,60 @@
 package co.aladinjunior.instagram.profile.view
 
-import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.commom.base.BasePresenter
+import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.UserAuth
+import co.aladinjunior.instagram.databinding.FragmentProfileBinding
+import co.aladinjunior.instagram.profile.Profile
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
+    R.layout.fragment_profile,
+    FragmentProfileBinding::bind
+), Profile.View {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override lateinit var presenter: Profile.Presenter
+    private lateinit var adapter: ProfileAdapter
+
+
+    override fun setupPresenter(presenter: BasePresenter) {
+        //TODO: presenter = profilePresenter(view, repository)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.profile_rv)
-        rv.adapter = ProfileAdapter()
-        rv.layoutManager = GridLayoutManager(requireContext(), 3)
+    override fun setupViews() {
+        adapter = ProfileAdapter()
+        binding?.profileRv?.adapter = adapter
+        binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
+
+
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    override fun getMenu(): Int {
+        return R.menu.menu_profile_toolbar
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_profile_toolbar, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+
+    override fun displayPosts() {
+        TODO("Not yet implemented")
+    }
+
+    override fun displayUserProfile(userAuth: UserAuth) {
+        binding?.profilePostsCount?.text = userAuth.postCount.toString()
+        binding?.profileFollowingCount?.text = userAuth.followingCount.toString()
+        binding?.profileFollowersCount?.text = userAuth.followersCount.toString()
+        binding?.profileTextUsername?.text = userAuth.name
+        binding?.profileTextBio?.text = "TODO"
+        presenter.fetchUserProfile()
+    }
+
+    override fun displayRequestFailure(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun displayFullPosts(posts: List<Post>) {
+        adapter.items = posts
+        adapter.notifyDataSetChanged()
     }
 }

@@ -1,15 +1,15 @@
 package co.aladinjunior.instagram.splash
 
-import co.aladinjunior.instagram.commom.base.PresenterBase
-import co.aladinjunior.instagram.commom.base.ViewBase
+import co.aladinjunior.instagram.commom.base.BasePresenter
+import co.aladinjunior.instagram.commom.base.BaseView
 
 interface Splash {
 
-    interface View: ViewBase<Presenter>{
+    interface View: BaseView<Presenter>{
         fun onAuthSuccess()
         fun onAuthFailure()
     }
-    interface Presenter: PresenterBase{
+    interface Presenter: BasePresenter{
         fun authenticate()
     }
 }

@@ -1,5 +1,5 @@
 package co.aladinjunior.instagram.commom.base
 
-interface PresenterBase {
+interface BasePresenter {
     fun onDestroy()
 }
