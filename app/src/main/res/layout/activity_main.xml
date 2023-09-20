@@ -36,11 +36,10 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment
+        <FrameLayout
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:layout="@layout/fragment_profile"
             android:id="@+id/main_fragment"
-            android:name="co.aladinjunior.instagram.camera.view.CameraFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
