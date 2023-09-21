@@ -10,9 +10,12 @@ import co.aladinjunior.instagram.commom.model.UserAuth
 class FakeProfileRequest : ProfileDataSource {
 
     override fun fetchUserProfile(userUuid: String, callback: BaseCallback<UserAuth>) {
+        Handler(Looper.getMainLooper()).postDelayed({
             val userAuth = Database.userAuth.firstOrNull { userUuid == it.uuid }
             if (userAuth != null) callback.onSuccess(userAuth)
             else callback.onFailure("usuário não encontrado")
+        }, 2000)
+
 
     }
 
