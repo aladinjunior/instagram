@@ -6,6 +6,8 @@ import co.aladinjunior.instagram.login.data.LoginRepository
 import co.aladinjunior.instagram.login.presentation.LoginPresenter
 import co.aladinjunior.instagram.profile.Profile
 import co.aladinjunior.instagram.profile.data.FakeProfileRequest
+import co.aladinjunior.instagram.profile.data.ProfileDataSourceFactory
+import co.aladinjunior.instagram.profile.data.ProfileMemoryCache
 import co.aladinjunior.instagram.profile.data.ProfileRepository
 import co.aladinjunior.instagram.profile.presentation.ProfilePresenter
 import co.aladinjunior.instagram.register.RegisterEmail
@@ -53,6 +55,6 @@ object DependencyInjector {
         return ProfilePresenter(view, repository)
     }
     fun profileRepository() : ProfileRepository{
-        return ProfileRepository(FakeProfileRequest())
+        return ProfileRepository(ProfileDataSourceFactory(ProfileMemoryCache))
     }
 }

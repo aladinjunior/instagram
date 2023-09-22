@@ -13,7 +13,7 @@ import co.aladinjunior.instagram.profile.view.ProfileFragment
 import co.aladinjunior.instagram.search.view.SearchFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.IllegalStateException
+
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var profileFragment: Fragment
     private lateinit var currentFragment: Fragment
 
-    private lateinit var fragmentSavedState: HashMap<String, Fragment.SavedState>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,26 +35,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
 
-//        homeFragment = HomeFragment()
-//        searchFragment = SearchFragment()
-//        cameraFragment = CameraFragment()
-//        profileFragment = ProfileFragment()
-//
-//        currentFragment = homeFragment
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            add(R.id.main_fragment, homeFragment, "0")
-//            add(R.id.main_fragment, profileFragment, "1").hide(profileFragment)
-//            add(R.id.main_fragment, cameraFragment, "2").hide(cameraFragment)
-//            add(R.id.main_fragment, searchFragment, "3").hide(searchFragment)
-//            commit()
-//        }
+        homeFragment = HomeFragment()
+        searchFragment = SearchFragment()
+        cameraFragment = CameraFragment()
+        profileFragment = ProfileFragment()
 
-        if(savedInstanceState == null){
-            fragmentSavedState = HashMap()
-        } else{
-            savedInstanceState.getSerializable("fragmentState") as HashMap<String, Fragment.SavedState>
-        }
 
         binding.mainBottomNav.setOnNavigationItemSelectedListener(this)
         binding.mainBottomNav.selectedItemId = R.id.bottom_nav_home
@@ -70,51 +54,34 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             params.scrollFlags =
                 AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
             coordinatorParams.behavior = AppBarLayout.Behavior()
-        } else{
+        } else {
             params.scrollFlags = 0
             coordinatorParams.behavior = null
         }
         binding.mainAppbar.layoutParams = coordinatorParams
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putSerializable("fragmentState", fragmentSavedState)
-        super.onSaveInstanceState(outState)
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val scrollingToolbar = false
-        val newFragment = when(item.itemId){
-            R.id.bottom_nav_home ->{
-                HomeFragment()
+        var scrollingToolbar = false
+        when (item.itemId) {
+            R.id.bottom_nav_home -> currentFragment = homeFragment
+            R.id.bottom_nav_add_photo -> currentFragment = cameraFragment
+            R.id.bottom_nav_search -> currentFragment = searchFragment
+            R.id.bottom_nav_profile -> {
+                currentFragment = profileFragment
+                scrollingToolbar = true
             }
-            R.id.bottom_nav_profile ->{
-                ProfileFragment()
-            }
-            else -> null
+
         }
 
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.main_fragment)
-        val fragmentTag = newFragment?.javaClass?.simpleName
-
-        if (!currentFragment?.tag.equals(fragmentTag)) {
-            currentFragment?.let { fragment ->
-                fragmentSavedState.put(
-                    fragment.tag!!,
-                    supportFragmentManager.saveFragmentInstanceState(fragment)!!
-                )
-            }
-        }
-        newFragment?.setInitialSavedState(fragmentSavedState[fragmentTag])
-        newFragment?.let {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.main_fragment, it, fragmentTag)
-                addToBackStack(fragmentTag)
-                commit()
-            }
-        }
 
         setScrollingToolbar(scrollingToolbar)
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.main_fragment, currentFragment)
+                .commit()
+        }
 
         return true
     }

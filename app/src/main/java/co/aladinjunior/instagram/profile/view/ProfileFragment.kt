@@ -36,20 +36,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         presenter = DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        savedInstanceState?.let {
-            val state = it.getParcelable<UserAuth?>("lastState")
-            state?.let {
-                displayUserProfile(it)
-            }
-        }
-        super.onViewStateRestored(savedInstanceState)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable("lastState", presenter.state)
-        super.onSaveInstanceState(outState)
-    }
 
 
 
