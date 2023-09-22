@@ -15,7 +15,7 @@ interface Profile {
         fun displayPosts()
         fun displayUserProfile(userAuth: UserAuth)
         fun displayRequestFailure(message: String)
-        fun displayFullPosts(posts: List<Photo>)
+        fun displayFullPosts(posts: List<Post>)
 
 
     }

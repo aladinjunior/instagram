@@ -12,7 +12,7 @@ import co.aladinjunior.instagram.commom.model.Post
 
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
 
-    var items: List<Photo> = mutableListOf()
+    var items: List<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder(

@@ -2,11 +2,11 @@ package co.aladinjunior.instagram.profile.presentation
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
 import co.aladinjunior.instagram.commom.model.Database
-import co.aladinjunior.instagram.commom.model.Photo
+import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.profile.Profile
 import co.aladinjunior.instagram.profile.data.ProfileRepository
-import java.lang.IllegalStateException
+
 
 class ProfilePresenter(
     var view: Profile.View? = null,
@@ -27,9 +27,8 @@ class ProfilePresenter(
         })
     }
     override fun fetchUserPosts() {
-        val userUUID = Database.userSession?.uuid ?: throw RuntimeException("user not found")
-        repository.fetchUserPosts(userUUID, object : BaseCallback<List<Photo>> {
-            override fun onSuccess(data: List<Photo>) {
+        repository.fetchUserPosts(object : BaseCallback<List<Post>> {
+            override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
                     //TODO: CREATE EMPTY POSTS
                 } else {

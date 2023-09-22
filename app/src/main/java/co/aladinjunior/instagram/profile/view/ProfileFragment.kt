@@ -60,7 +60,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    override fun displayFullPosts(posts: List<Photo>) {
+    override fun displayFullPosts(posts: List<Post>) {
         presenter.fetchUserPosts()
         adapter.items = posts
         adapter.notifyDataSetChanged()

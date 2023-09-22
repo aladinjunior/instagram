@@ -23,7 +23,19 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         })
     }
 
-    fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Photo>>){
-        //TODO
+    fun fetchUserPosts(callback: BaseCallback<List<Post>>){
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        val userAuth = localDataSource.fetchUserSession()
+        val dataSource = dataSourceFactory.createFromPosts()
+        dataSource.fetchUserPosts(userAuth.uuid, object : BaseCallback<List<Post>>{
+            override fun onSuccess(data: List<Post>) {
+                localDataSource.post(data)
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+        })
     }
 }
