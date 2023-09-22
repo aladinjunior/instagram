@@ -1,5 +1,6 @@
 package co.aladinjunior.instagram.profile.view
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import co.aladinjunior.instagram.R
@@ -22,10 +23,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     private lateinit var adapter: ProfileAdapter
 
 
-    override fun setupPresenter() {
-        presenter = DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
-    }
-
     override fun setupViews() {
         adapter = ProfileAdapter()
         binding?.profileRv?.adapter = adapter
@@ -34,6 +31,27 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
         presenter.fetchUserProfile()
     }
+
+    override fun setupPresenter() {
+        presenter = DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            val state = it.getParcelable<UserAuth?>("lastState")
+            state?.let {
+                displayUserProfile(it)
+            }
+        }
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable("lastState", presenter.state)
+        super.onSaveInstanceState(outState)
+    }
+
+
 
     override fun getMenu(): Int {
         return R.menu.menu_profile_toolbar

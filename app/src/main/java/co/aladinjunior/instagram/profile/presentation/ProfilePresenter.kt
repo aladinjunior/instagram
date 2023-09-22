@@ -13,10 +13,14 @@ class ProfilePresenter(
     val repository: ProfileRepository
 ) : Profile.Presenter {
 
+    override lateinit var state: UserAuth
+
+
     override fun fetchUserProfile() {
        val user = Database.userSession ?: throw IllegalStateException("usuario nao encontrado")
         repository.fetchUserProfile(user.uuid , object : BaseCallback<UserAuth>{
             override fun onSuccess(data: UserAuth) {
+                state = data
                 view?.displayUserProfile(data)
             }
 
