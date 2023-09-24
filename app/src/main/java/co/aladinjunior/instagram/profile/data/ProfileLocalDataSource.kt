@@ -1,15 +1,15 @@
 package co.aladinjunior.instagram.profile.data
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
+import co.aladinjunior.instagram.commom.base.Cache
 import co.aladinjunior.instagram.commom.model.Database
-import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
-    private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>
+    private val profileCache: Cache<UserAuth>,
+    private val postsProfileCache: Cache<List<Post>>
 ) : ProfileDataSource{
     override fun fetchUserProfile(userUuid: String, callback: BaseCallback<UserAuth>) {
 
@@ -20,7 +20,7 @@ class ProfileLocalDataSource(
     }
 
     override fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>) {
-       val posts = postsCache.get(userUuid)
+       val posts = postsProfileCache.get(userUuid)
         if(posts != null) callback.onSuccess(posts)
         else callback.onFailure("usuário não postou nada")
     }

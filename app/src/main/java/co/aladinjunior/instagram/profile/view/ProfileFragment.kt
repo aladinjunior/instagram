@@ -1,13 +1,10 @@
 package co.aladinjunior.instagram.profile.view
 
-import android.os.Bundle
+
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
-import co.aladinjunior.instagram.commom.base.BasePresenter
-import co.aladinjunior.instagram.commom.model.Database
-import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.commom.util.DependencyInjector
@@ -44,9 +41,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
 
-    override fun displayPosts() {
-        //TODO: GONNA SHOW ALL POSTS
-    }
 
     override fun displayUserProfile(userAuth: UserAuth) {
         binding?.profilePostsCount?.text = userAuth.postCount.toString()

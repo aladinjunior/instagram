@@ -1,6 +1,6 @@
-package co.aladinjunior.instagram.profile.data
+package co.aladinjunior.instagram.commom.base
 
-interface ProfileCache<T> {
+interface Cache<T> {
 
     fun isCached() : Boolean
     fun get(response: String?) : T?

@@ -1,8 +1,9 @@
 package co.aladinjunior.instagram.profile.data
 
+import co.aladinjunior.instagram.commom.base.Cache
 import co.aladinjunior.instagram.commom.model.UserAuth
 
-object ProfileMemoryCache : ProfileCache<UserAuth> {
+object MemoryProfileCache : Cache<UserAuth> {
     private var userAuth: UserAuth? = null
     override fun isCached(): Boolean {
         return userAuth != null

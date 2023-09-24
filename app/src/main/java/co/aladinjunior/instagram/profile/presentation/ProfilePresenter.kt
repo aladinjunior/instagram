@@ -1,7 +1,6 @@
 package co.aladinjunior.instagram.profile.presentation
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
-import co.aladinjunior.instagram.commom.model.Database
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.profile.Profile
@@ -10,9 +9,8 @@ import co.aladinjunior.instagram.profile.data.ProfileRepository
 
 class ProfilePresenter(
     var view: Profile.View? = null,
-    val repository: ProfileRepository
+    private val repository: ProfileRepository
 ) : Profile.Presenter {
-
 
 
     override fun fetchUserProfile() {
@@ -30,7 +28,7 @@ class ProfilePresenter(
         repository.fetchUserPosts(object : BaseCallback<List<Post>> {
             override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
-                    //TODO: CREATE EMPTY POSTS
+                    //TODO: SHOW THERE IS NO POSTS
                 } else {
                     view?.displayFullPosts(data)
                 }
@@ -42,7 +40,6 @@ class ProfilePresenter(
 
         })
     }
-
 
     override fun onDestroy() {
         view = null

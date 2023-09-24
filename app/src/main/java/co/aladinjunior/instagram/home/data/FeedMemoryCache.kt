@@ -1,8 +1,9 @@
-package co.aladinjunior.instagram.profile.data
+package co.aladinjunior.instagram.home.data
 
+import co.aladinjunior.instagram.commom.base.Cache
 import co.aladinjunior.instagram.commom.model.Post
 
-object PostsMemoryCache : ProfileCache<List<Post>> {
+object FeedMemoryCache : Cache<List<Post>> {
     private var posts: List<Post>? = null
 
     override fun isCached(): Boolean {

@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.model.Post
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
+
+    var items: List<Post> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder(
@@ -16,17 +19,16 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
-        holder.bind(R.drawable.ic_insta_add)
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return items.size
     }
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind(image: Int){
+        fun bind(posts: Post){
             itemView.findViewById<ImageView>(R.id.home_img_post)
-                .setImageResource(image)
         }
     }
 
