@@ -1,10 +1,8 @@
-package co.aladinjunior.instagram.camera.view
+package co.aladinjunior.instagram.add.view
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 
 

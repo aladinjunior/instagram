@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.camera.view.CameraFragment
+import co.aladinjunior.instagram.add.view.CameraFragment
 import co.aladinjunior.instagram.databinding.ActivityMainBinding
 import co.aladinjunior.instagram.home.view.HomeFragment
 import co.aladinjunior.instagram.profile.view.ProfileFragment
