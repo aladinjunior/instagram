@@ -2,20 +2,20 @@ package co.aladinjunior.instagram.register.view
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
+
 import android.view.View
-import android.view.ViewGroup
+
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.commom.model.Database
+
 import co.aladinjunior.instagram.commom.util.CustomTextWatcher
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentRegisterNamePasswordBinding
 import co.aladinjunior.instagram.register.RegisterNamePassword
 import java.lang.IllegalArgumentException
 
-class RegisterNamePasswordFragment(var fragmentAttachListener: FragmentAttachListener? = null) :
+class RegisterNamePasswordFragment(private var fragmentAttachListener: FragmentAttachListener? = null) :
     Fragment(R.layout.fragment_register_name_password),
     RegisterNamePassword.View {
 
@@ -64,7 +64,7 @@ class RegisterNamePasswordFragment(var fragmentAttachListener: FragmentAttachLis
 
     }
 
-    val watcher = CustomTextWatcher {
+    private val watcher = CustomTextWatcher {
         binding?.registerBttnNext?.isEnabled =
             binding?.registerEditTextName?.text.toString().isNotEmpty()
                     && binding?.registerEditTextPassword?.text.toString().isNotEmpty()
