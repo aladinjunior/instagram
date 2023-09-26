@@ -5,10 +5,13 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.add.Add
 import co.aladinjunior.instagram.commom.base.BaseFragment
 import co.aladinjunior.instagram.databinding.FragmentAddBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
@@ -26,6 +29,19 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
         viewPager?.adapter = adapter
 
         if (tab != null && viewPager != null) {
+            tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    if (tab?.text == getString(adapter.tabs[0])){
+                        startCamera()
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+            })
             TabLayoutMediator(tab, viewPager) {tab, position ->
                 tab.text = getString(adapter.tabs[position])
             }.attach()
@@ -44,6 +60,7 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
     }
 
     private fun startCamera(){
+        setFragmentResult(CAMERA_KEY, bundleOf(START_CAMERA to true))
     }
 
     private fun allPermissionsGranted() : Boolean {
@@ -52,6 +69,8 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
 
     companion object {
         const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        const val CAMERA_KEY = "camera_key"
+        const val START_CAMERA = "start_camera"
     }
 
 }
