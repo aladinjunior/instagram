@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.add.view.CameraFragment
+import co.aladinjunior.instagram.add.view.AddFragment
 import co.aladinjunior.instagram.databinding.ActivityMainBinding
 import co.aladinjunior.instagram.home.view.HomeFragment
 import co.aladinjunior.instagram.profile.view.ProfileFragment
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeFragment: Fragment
     private lateinit var searchFragment: Fragment
-    private lateinit var cameraFragment: Fragment
+    private lateinit var addFragment: Fragment
     private lateinit var profileFragment: Fragment
     private lateinit var currentFragment: Fragment
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         homeFragment = HomeFragment()
         searchFragment = SearchFragment()
-        cameraFragment = CameraFragment()
+        addFragment = AddFragment()
         profileFragment = ProfileFragment()
 
 
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         var scrollingToolbar = false
         when (item.itemId) {
             R.id.bottom_nav_home -> currentFragment = homeFragment
-            R.id.bottom_nav_add_photo -> currentFragment = cameraFragment
+            R.id.bottom_nav_add_photo -> currentFragment = addFragment
             R.id.bottom_nav_search -> currentFragment = searchFragment
             R.id.bottom_nav_profile -> {
                 currentFragment = profileFragment
