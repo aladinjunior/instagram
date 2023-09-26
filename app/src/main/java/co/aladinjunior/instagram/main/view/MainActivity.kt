@@ -7,6 +7,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.add.view.AddFragment
+import co.aladinjunior.instagram.commom.extension.replaceFragment
 import co.aladinjunior.instagram.databinding.ActivityMainBinding
 import co.aladinjunior.instagram.home.view.HomeFragment
 import co.aladinjunior.instagram.profile.view.ProfileFragment
@@ -78,9 +79,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         setScrollingToolbar(scrollingToolbar)
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.main_fragment, currentFragment)
-                .commit()
+        currentFragment.let {
+            replaceFragment(R.id.main_fragment, it)
         }
 
         return true

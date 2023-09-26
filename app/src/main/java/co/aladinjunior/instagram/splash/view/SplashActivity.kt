@@ -2,15 +2,11 @@ package co.aladinjunior.instagram.splash.view
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewPropertyAnimator
-import co.aladinjunior.instagram.commom.extension.animationEnd
 import co.aladinjunior.instagram.commom.extension.customIntent
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.ActivitySplashBinding
-import co.aladinjunior.instagram.login.Login
 import co.aladinjunior.instagram.login.view.LoginActivity
 import co.aladinjunior.instagram.main.view.MainActivity
 import co.aladinjunior.instagram.splash.Splash
