@@ -12,7 +12,6 @@ import co.aladinjunior.instagram.add.Add
 import co.aladinjunior.instagram.commom.base.BaseFragment
 import co.aladinjunior.instagram.commom.util.CustomTabSelected
 import co.aladinjunior.instagram.databinding.FragmentAddBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
