@@ -5,6 +5,7 @@ import co.aladinjunior.instagram.commom.base.Cache
 import co.aladinjunior.instagram.commom.model.Database
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
+import java.lang.IllegalStateException
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
@@ -20,9 +21,14 @@ class ProfileLocalDataSource(
     }
 
     override fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>) {
-       val posts = postsProfileCache.get(userUuid)
-        if(posts != null) callback.onSuccess(posts)
-        else callback.onFailure("usuário não postou nada")
+       var posts = postsProfileCache.get(userUuid)
+        if(posts != null){
+            posts = Database.posts[userUuid]?.toList() ?: throw IllegalStateException("0 posts")
+            callback.onSuccess(posts)
+        }
+        else{
+            callback.onFailure("usuário não postou nada")
+        }
     }
 
     override fun fetchUserSession(): UserAuth {

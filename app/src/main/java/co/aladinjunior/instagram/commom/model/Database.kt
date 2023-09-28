@@ -29,10 +29,10 @@ object Database {
             posts[userB.uuid] = hashSetOf()
             feeds[userB.uuid] = hashSetOf()
 
-
+            userSession = userAuth.first()
         }
 
-        userSession = userAuth.first()
+
 
     }
 

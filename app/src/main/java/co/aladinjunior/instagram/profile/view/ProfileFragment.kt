@@ -27,7 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
 
         presenter.fetchUserProfile()
-        presenter.fetchUserPosts()
+
     }
 
     override fun setupPresenter() {
@@ -47,6 +47,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileFollowersCount?.text = userAuth.followersCount.toString()
         binding?.profileTextUsername?.text = userAuth.name
         binding?.profileTextBio?.text = "TODO"
+
+        presenter.fetchUserPosts()
     }
 
     override fun displayRequestFailure(message: String) {
@@ -54,7 +56,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
     override fun displayFullPosts(posts: List<Post>) {
-        presenter.fetchUserPosts()
         adapter.items = posts
         adapter.notifyDataSetChanged()
     }
