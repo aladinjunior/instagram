@@ -23,7 +23,7 @@ class ProfileLocalDataSource(
     override fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>) {
        var posts = postsProfileCache.get(userUuid)
         if(posts != null){
-            posts = Database.posts[userUuid]?.toList() ?: throw IllegalStateException("0 posts")
+            posts = Database.posts[userUuid]?.toList() ?: emptyList()
             callback.onSuccess(posts)
         }
         else{
@@ -39,7 +39,7 @@ class ProfileLocalDataSource(
         profileCache.put(data)
     }
 
-    override fun post(response: List<Post>) {
+    override fun post(response: List<Post>?) {
         postsProfileCache.put(response)
     }
 }

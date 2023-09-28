@@ -11,7 +11,9 @@ class ProfilePresenter(
     var view: Profile.View? = null,
     private val repository: ProfileRepository
 ) : Profile.Presenter {
-
+    override fun clearCache() {
+        repository.clear()
+    }
 
     override fun fetchUserProfile() {
         repository.fetchUserProfile(object : BaseCallback<UserAuth>{

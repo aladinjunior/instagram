@@ -4,11 +4,10 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import co.aladinjunior.instagram.commom.model.Database
-import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.UserAuth
 import java.util.*
 
-class FakeRegisterRequest : RegisterDataSource{
+class FakeRegisterDataSource : RegisterDataSource{
 
     override fun registrate(email: String, callback: RegisterCallback) {
         Handler(Looper.getMainLooper()).postDelayed({
@@ -24,7 +23,7 @@ class FakeRegisterRequest : RegisterDataSource{
         Handler(Looper.getMainLooper()).postDelayed({
             val userAuth = Database.userAuth.firstOrNull { email == it.email }
             if(userAuth == null) {
-                val newSession =  UserAuth(UUID.randomUUID().toString(), name, email, password)
+                val newSession =  UserAuth(UUID.randomUUID().toString(), name,null, email, password)
                 val created = Database.userAuth.add(newSession)
                 if (created){
                     Database.userSession = newSession
@@ -43,10 +42,10 @@ class FakeRegisterRequest : RegisterDataSource{
             if (userAuth == null){
                 callback.onFailure("usuário não encontrado!")
             } else {
-                val photo = Photo(userAuth.uuid, uri)
-                val created = Database.photo.add(photo)
-                if (created) callback.onSuccess()
-                else callback.onFailure("erro interno")
+               val index = Database.userAuth.indexOf(Database.userSession)
+                Database.userAuth[index] = Database.userSession!!.copy(photoUri = uri)
+                Database.userSession = Database.userAuth[index]
+                callback.onSuccess()
             }
 
             callback.onComplete()

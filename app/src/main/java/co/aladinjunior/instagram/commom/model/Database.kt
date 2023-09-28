@@ -1,22 +1,26 @@
 package co.aladinjunior.instagram.commom.model
 
+import android.net.Uri
+import java.io.File
 import java.util.*
 
 object Database {
-    val userAuth = hashSetOf<UserAuth>()
-    val photo = hashSetOf<Photo>()
+    val userAuth = mutableListOf<UserAuth>()
     val posts = hashMapOf<String, MutableSet<Post>>()
     val feeds = hashMapOf<String, MutableSet<Post>>()
     val followers = hashMapOf<String, Set<String>>()
     var userSession: UserAuth? = null
+
+    const val FILE_PATHNAME = "/storage/emulated/0/Android/media/co.aladinjunior.instagram/Instagram/2023-09-28-15-31-41-866.jpg"
 
 
 
     init {
 
         with(userAuth){
-            val userA = UserAuth(UUID.randomUUID().toString(),"userA", "userA@gmail.com", "12345678")
-            val userB = UserAuth(UUID.randomUUID().toString(),"userB", "userB@gmail.com", "12345678")
+            val userA = UserAuth(UUID.randomUUID().toString(),"userA", Uri.fromFile(File(
+                FILE_PATHNAME)), "userA@gmail.com", "12345678")
+            val userB = UserAuth(UUID.randomUUID().toString(),"userB", Uri.fromFile(File(FILE_PATHNAME)), "userB@gmail.com", "12345678")
 
             add(userA)
             add(userB)

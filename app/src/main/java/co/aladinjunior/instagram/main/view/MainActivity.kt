@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var homeFragment: HomeFragment
     private lateinit var searchFragment: Fragment
     private lateinit var addFragment: Fragment
-    private lateinit var profileFragment: Fragment
+    private lateinit var profileFragment: ProfileFragment
     private lateinit var currentFragment: Fragment
 
 
@@ -86,6 +86,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onPostCreated() {
         homeFragment.presenter.clearCache()
+        if(supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null){
+            profileFragment.presenter.clearCache()
+        }
+
 
         binding.mainBottomNav.selectedItemId = R.id.bottom_nav_home
     }

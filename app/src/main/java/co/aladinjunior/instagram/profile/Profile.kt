@@ -9,6 +9,7 @@ interface Profile {
     interface Presenter : BasePresenter{
         fun fetchUserProfile()
         fun fetchUserPosts()
+        fun clearCache()
     }
     interface View : BaseView<Presenter> {
         fun displayUserProfile(userAuth: UserAuth)

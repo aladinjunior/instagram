@@ -6,6 +6,11 @@ import co.aladinjunior.instagram.commom.model.UserAuth
 
 class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory) {
 
+    fun clear(){
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        localDataSource.post(null)
+    }
+
     fun fetchUserProfile(callback: BaseCallback<UserAuth>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
         val userAuth = localDataSource.fetchUserSession()

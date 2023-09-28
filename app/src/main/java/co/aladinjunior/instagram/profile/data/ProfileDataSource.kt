@@ -11,6 +11,6 @@ interface ProfileDataSource {
     fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>)
     fun fetchUserSession() : UserAuth {throw RuntimeException()}
     fun putUser(data: UserAuth) {throw RuntimeException()}
-    fun post(response: List<Post>) {throw RuntimeException()}
+    fun post(response: List<Post>?) {throw RuntimeException()}
 
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 
 class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder>() {
