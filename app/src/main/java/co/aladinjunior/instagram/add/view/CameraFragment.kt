@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.*
 import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.CameraSelector
@@ -77,7 +78,9 @@ class CameraFragment : Fragment() {
                     it.setSurfaceProvider(previewView.surfaceProvider)
                 }
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-            imageCapture = ImageCapture.Builder().build()
+            imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(480, 480))
+                .build()
 
             try {
                 cameraProvider.unbindAll()

@@ -8,6 +8,6 @@ import java.util.*
 
 interface HomeDataSource {
     fun fetchPost(uuid: String, callback: BaseCallback<List<Post>>)
-    fun putPost(data: List<Post>) {throw UnsupportedOperationException()}
+    fun putPost(data: List<Post>?) {throw UnsupportedOperationException()}
     fun fetchSession() : UserAuth {throw UnsupportedOperationException()}
 }

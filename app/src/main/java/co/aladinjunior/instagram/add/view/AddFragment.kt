@@ -1,6 +1,8 @@
 package co.aladinjunior.instagram.add.view
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -23,6 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class AddFragment : Fragment(R.layout.fragment_add) {
     private var binding: FragmentAddBinding? = null
     private lateinit var adapter: AddViewPagerAdapter
+    private var addListener: AddListener? = null
 
 
 
@@ -40,10 +43,19 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             uri?.let {
                 val i = Intent(requireContext(), AddActivity::class.java)
                     .putExtra(URI, uri)
-                startActivity(i)
+                getActivityResult.launch(i)
+
             }
 
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is AddListener){
+            addListener = context
+        }
+
     }
 
     private fun setupViews() {
@@ -66,10 +78,18 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         }
     }
 
-
+    interface AddListener{
+        fun onPostCreated()
+    }
     private val tabListener = CustomTabSelected { tab ->
         if (tab?.text == getString(adapter.tabs[0])) {
             startCamera()
+        }
+    }
+
+    private val getActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == Activity.RESULT_OK){
+            addListener?.onPostCreated()
         }
     }
 

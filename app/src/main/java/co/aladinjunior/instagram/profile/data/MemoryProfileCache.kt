@@ -16,7 +16,7 @@ object MemoryProfileCache : Cache<UserAuth> {
         return null
     }
 
-    override fun put(data: UserAuth) {
+    override fun put(data: UserAuth?) {
         userAuth = data
     }
 }

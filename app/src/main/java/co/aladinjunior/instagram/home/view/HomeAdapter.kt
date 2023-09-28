@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.model.Post
@@ -28,7 +29,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(posts: Post){
-            itemView.findViewById<ImageView>(R.id.home_img_post)
+            itemView.findViewById<ImageView>(R.id.home_img_post).setImageURI(posts.uri)
+            itemView.findViewById<TextView>(R.id.home_captions).text = posts.caption
+            itemView.findViewById<TextView>(R.id.home_username).text = posts.publisher.name
         }
     }
 

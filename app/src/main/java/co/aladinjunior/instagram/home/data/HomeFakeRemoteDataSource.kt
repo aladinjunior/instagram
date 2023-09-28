@@ -7,7 +7,7 @@ import co.aladinjunior.instagram.commom.model.Database
 import co.aladinjunior.instagram.commom.model.Post
 
 
-class FakeHomeRequest : HomeDataSource {
+class HomeFakeRemoteDataSource : HomeDataSource {
 
     override fun fetchPost(uuid: String, callback: BaseCallback<List<Post>>) {
         Handler(Looper.getMainLooper()).postDelayed({

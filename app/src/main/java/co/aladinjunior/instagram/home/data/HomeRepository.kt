@@ -5,6 +5,11 @@ import co.aladinjunior.instagram.commom.model.Post
 
 class HomeRepository(private val dataSourceFactory: HomeDataSourceFactory) {
 
+    fun clearCache(){
+        val localDataSource = dataSourceFactory.createLocalDataSoure()
+        localDataSource.putPost(null)
+    }
+
     fun fetchPosts(callback: BaseCallback<List<Post>>){
         val localDataSource = dataSourceFactory.createLocalDataSoure()
         val userAuth = localDataSource.fetchSession()

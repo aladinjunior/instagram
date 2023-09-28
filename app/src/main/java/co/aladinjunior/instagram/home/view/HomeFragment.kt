@@ -38,7 +38,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
     }
 
     override fun displayFullPosts(posts: List<Post>) {
-
         adapter.items = posts
         adapter.notifyDataSetChanged()
     }

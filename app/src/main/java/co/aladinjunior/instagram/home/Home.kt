@@ -7,6 +7,7 @@ import co.aladinjunior.instagram.commom.model.Post
 interface Home {
     interface Presenter : BasePresenter{
         fun fetchPosts()
+        fun clearCache()
     }
     interface View{
         fun displayPostsFailure(message: String)

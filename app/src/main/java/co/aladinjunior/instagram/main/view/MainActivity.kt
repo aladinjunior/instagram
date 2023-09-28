@@ -16,10 +16,10 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var homeFragment: Fragment
+    private lateinit var homeFragment: HomeFragment
     private lateinit var searchFragment: Fragment
     private lateinit var addFragment: Fragment
     private lateinit var profileFragment: Fragment
@@ -79,12 +79,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         setScrollingToolbar(scrollingToolbar)
 
-        currentFragment.let {
-            replaceFragment(R.id.main_fragment, it)
-        }
+        replaceFragment(R.id.main_fragment, currentFragment)
 
         return true
     }
 
+    override fun onPostCreated() {
+        homeFragment.presenter.clearCache()
 
+        binding.mainBottomNav.selectedItemId = R.id.bottom_nav_home
+    }
 }

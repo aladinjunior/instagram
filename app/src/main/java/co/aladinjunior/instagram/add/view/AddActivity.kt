@@ -1,5 +1,6 @@
 package co.aladinjunior.instagram.add.view
 
+import android.app.Activity
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -59,6 +60,7 @@ class AddActivity : AppCompatActivity(), Add.View{
     }
 
     override fun onSuccesPost() {
+        setResult(Activity.RESULT_OK)
         finish()
     }
 

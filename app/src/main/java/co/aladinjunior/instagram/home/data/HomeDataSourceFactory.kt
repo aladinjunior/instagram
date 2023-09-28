@@ -11,7 +11,7 @@ class HomeDataSourceFactory(private val postCache: Cache<List<Post>>) {
 
     fun createFromPosts() : HomeDataSource{
         if (postCache.isCached()) return HomeLocalDataSource(postCache)
-        return FakeHomeRequest()
+        return HomeFakeRemoteDataSource()
 
     }
 }

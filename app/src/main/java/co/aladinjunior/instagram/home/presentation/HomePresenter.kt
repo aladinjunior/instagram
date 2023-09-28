@@ -9,6 +9,10 @@ class HomePresenter(
     var view: Home.View? = null,
     private val repository: HomeRepository
 ) : Home.Presenter{
+    override fun clearCache() {
+        repository.clearCache()
+    }
+
     override fun fetchPosts() {
         repository.fetchPosts(object : BaseCallback<List<Post>>{
             override fun onSuccess(data: List<Post>) {
