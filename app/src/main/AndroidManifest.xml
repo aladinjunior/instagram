@@ -6,7 +6,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <queries>
         <intent>
@@ -21,16 +21,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram">
-        <activity android:name=".splash.view.SplashActivity"
+        <activity android:name=".add.view.AddActivity"></activity>
+        <activity
+            android:name=".splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.view.LoginActivity"/>
-        <activity android:name=".register.view.RegisterActivity"/>
-        <activity android:name=".main.view.MainActivity"/>
+        <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".register.view.RegisterActivity" />
+        <activity android:name=".main.view.MainActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

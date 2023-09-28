@@ -1,10 +1,10 @@
 package co.aladinjunior.instagram.add.view
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -13,7 +13,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.add.view.AddFragment.Companion.CAMERA_KEY
@@ -54,8 +56,8 @@ class CameraFragment : Fragment() {
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()), object : ImageCapture.OnImageSavedCallback{
             override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                Uri.fromFile(photoFile)
-                Toast.makeText(requireContext(), "foto tirada", Toast.LENGTH_SHORT).show()
+                val uri = Uri.fromFile(photoFile)
+                setFragmentResult(URI_KEY, bundleOf(URI to uri))
             }
 
             override fun onError(exception: ImageCaptureException) {
@@ -86,6 +88,11 @@ class CameraFragment : Fragment() {
 
 
         }, ContextCompat.getMainExecutor(requireContext()))
+    }
+
+    companion object{
+        const val URI = "uri"
+        const val URI_KEY = "uri_key"
     }
 }
 

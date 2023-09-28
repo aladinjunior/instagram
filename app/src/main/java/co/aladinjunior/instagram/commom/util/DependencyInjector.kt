@@ -1,5 +1,10 @@
 package co.aladinjunior.instagram.commom.util
 
+import co.aladinjunior.instagram.add.Add
+import co.aladinjunior.instagram.add.data.AddFakeRemoteDataSource
+import co.aladinjunior.instagram.add.data.AddLocalDataSource
+import co.aladinjunior.instagram.add.data.AddRepository
+import co.aladinjunior.instagram.add.presentation.AddPresenter
 import co.aladinjunior.instagram.home.Home
 import co.aladinjunior.instagram.home.data.FeedMemoryCache
 import co.aladinjunior.instagram.home.data.HomeDataSourceFactory
@@ -64,5 +69,11 @@ object DependencyInjector {
     }
     fun homeRepository() : HomeRepository{
         return HomeRepository(HomeDataSourceFactory(FeedMemoryCache))
+    }
+    fun addPresenter(view: Add.View, repository: AddRepository) : Add.Presenter{
+        return AddPresenter(view, repository)
+    }
+    fun addRepository() : AddRepository{
+        return AddRepository(AddFakeRemoteDataSource(), AddLocalDataSource())
     }
 }

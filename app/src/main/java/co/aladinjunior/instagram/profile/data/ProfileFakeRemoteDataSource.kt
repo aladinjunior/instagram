@@ -8,7 +8,7 @@ import co.aladinjunior.instagram.commom.model.Photo
 import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 
-class FakeProfileRequest : ProfileDataSource {
+class ProfileFakeRemoteDataSource : ProfileDataSource {
 
     override fun fetchUserProfile(userUuid: String, callback: BaseCallback<UserAuth>) {
         Handler(Looper.getMainLooper()).postDelayed({
@@ -22,11 +22,8 @@ class FakeProfileRequest : ProfileDataSource {
 
     override fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>) {
         Handler(Looper.getMainLooper()).postDelayed({
-
             val posts = Database.posts[userUuid]
-
             callback.onSuccess(posts?.toList() ?: emptyList())
-
         }, 2000)
     }
 

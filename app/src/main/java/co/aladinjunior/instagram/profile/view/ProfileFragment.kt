@@ -27,19 +27,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
 
         presenter.fetchUserProfile()
+        presenter.fetchUserPosts()
     }
 
     override fun setupPresenter() {
-        presenter = DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
+        presenter =
+            DependencyInjector.profilePresenter(this, DependencyInjector.profileRepository())
     }
-
-
 
 
     override fun getMenu(): Int {
         return R.menu.menu_profile_toolbar
     }
-
 
 
     override fun displayUserProfile(userAuth: UserAuth) {

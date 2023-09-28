@@ -1,30 +1,52 @@
 package co.aladinjunior.instagram.add.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.add.Add
-import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.add.view.CameraFragment.Companion.URI
+import co.aladinjunior.instagram.add.view.CameraFragment.Companion.URI_KEY
 import co.aladinjunior.instagram.commom.util.CustomTabSelected
 import co.aladinjunior.instagram.databinding.FragmentAddBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
-    R.layout.fragment_add,
-    FragmentAddBinding::bind
-), Add.View {
-    override lateinit var presenter: Add.Presenter
+class AddFragment : Fragment(R.layout.fragment_add) {
+    private var binding: FragmentAddBinding? = null
     private lateinit var adapter: AddViewPagerAdapter
 
-    override fun setupPresenter() {
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentAddBinding.bind(view)
+        if (savedInstanceState == null)
+        setupViews()
     }
 
-    override fun setupViews() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(URI_KEY){_, bundle ->
+            val uri = bundle.getParcelable<Uri>(URI)
+            uri?.let {
+                val i = Intent(requireContext(), AddActivity::class.java)
+                    .putExtra(URI, uri)
+                startActivity(i)
+            }
+
+        }
+    }
+
+    private fun setupViews() {
         val viewPager = binding?.addViewpager
         val tabLayout = binding?.addTab
         adapter = AddViewPagerAdapter(requireActivity())

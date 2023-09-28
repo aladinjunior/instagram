@@ -28,7 +28,7 @@ class ProfilePresenter(
         repository.fetchUserPosts(object : BaseCallback<List<Post>> {
             override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
-                    //TODO: SHOW THERE IS NO POSTS
+                    view?.displayRequestFailure("não há postagens disponiveis")
                 } else {
                     view?.displayFullPosts(data)
                 }
