@@ -16,7 +16,6 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
     FragmentGalleryBinding::bind
 ), Post.View{
 
-
     override lateinit var presenter: Post.Presenter
     private lateinit var adapter: PicturesAdapter
 
@@ -26,7 +25,10 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
     }
 
     override fun setupViews() {
-        adapter = PicturesAdapter()
+        adapter = PicturesAdapter{uri ->
+            binding?.galleryScrolling?.smoothScrollTo(0, 0)
+            binding?.galleryImgSelected?.setImageURI(uri)
+        }
 
         binding?.galleryRv?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.galleryRv?.adapter = adapter
@@ -39,7 +41,8 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
     }
 
     override fun loadAllPics(pictures: List<Uri>) {
-
+        binding?.galleryScrolling?.smoothScrollTo(0,0)
+        binding?.galleryImgSelected?.setImageURI(pictures.first())
         adapter.items = pictures
         adapter.notifyDataSetChanged()
     }

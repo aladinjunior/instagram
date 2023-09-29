@@ -13,7 +13,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 
-class PicturesAdapter : RecyclerView.Adapter<PicturesAdapter.PostViewHolder>() {
+class PicturesAdapter(private val onClick: (image: Uri) -> Unit) : RecyclerView.Adapter<PicturesAdapter.PostViewHolder>() {
 
     var items: List<Uri> = mutableListOf()
 
@@ -40,9 +40,11 @@ class PicturesAdapter : RecyclerView.Adapter<PicturesAdapter.PostViewHolder>() {
                 200, 200)
             }
 
-//            val bitmap = itemView.context.contentResolver.loadThumbnail(image, Size(200, 200), null)
             itemView.findViewById<ImageView>(R.id.profile_img_photos)
                 .setImageBitmap(bitmap)
+            itemView.setOnClickListener {
+                onClick(image)
+            }
         }
     }
 

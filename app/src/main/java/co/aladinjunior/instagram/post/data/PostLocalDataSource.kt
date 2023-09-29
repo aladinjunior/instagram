@@ -29,18 +29,23 @@ class PostLocalDataSource(private val context: Context) : PostDataSource {
             "${MediaStore.Images.Media._ID} DESC"
         )
 
-        cursor?.let {
-            val columnId = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+        if (cursor?.isFirst == false) callback.onFailure("galeria vazia")
 
-            while (cursor.moveToNext()){
+        cursor?.let {
+            val columnId = it.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+
+            while (it.moveToNext()){
                 val id = cursor.getLong(columnId)
                 val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
                 photos.add(uri)
-                if (photos.size == 0) callback.onFailure("galeria está vazia")
-                if(photos.size == 99) break
+                if (photos.size == 0) {
+                    callback.onFailure("galeria está vazia")
+                } else {
+                    callback.onSuccess(photos)
+                    if(photos.size == 99) break
+                }
             }
         }
-        callback.onSuccess(photos)
         cursor?.close()
         return photos
 
