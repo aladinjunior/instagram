@@ -12,9 +12,17 @@ class GalleryPresenter(
     private val repository: PostRepository
 ) : Post.Presenter, CoroutineScope {
 
+    private var uri: Uri? = null
     private val job = Job()
     override var coroutineContext: CoroutineContext = Dispatchers.IO + job
 
+    override fun getPic(): Uri? {
+        return uri
+    }
+
+    override fun setPic(uri: Uri) {
+        this.uri = uri
+    }
 
     override fun fetchPics() {
         launch {

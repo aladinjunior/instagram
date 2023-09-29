@@ -7,6 +7,8 @@ import co.aladinjunior.instagram.commom.base.BaseView
 interface Post {
 
     interface Presenter : BasePresenter{
+        fun getPic() : Uri?
+        fun setPic(uri: Uri)
         fun fetchPics()
 
     }
