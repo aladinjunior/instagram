@@ -1,4 +1,4 @@
-package co.aladinjunior.instagram.add.view
+package co.aladinjunior.instagram.post.view
 
 import android.Manifest
 import android.app.Activity
@@ -16,8 +16,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.add.view.CameraFragment.Companion.URI
-import co.aladinjunior.instagram.add.view.CameraFragment.Companion.URI_KEY
+import co.aladinjunior.instagram.add.view.AddActivity
+import co.aladinjunior.instagram.post.view.CameraFragment.Companion.URI
+import co.aladinjunior.instagram.post.view.CameraFragment.Companion.URI_KEY
 import co.aladinjunior.instagram.commom.util.CustomTabSelected
 import co.aladinjunior.instagram.databinding.FragmentAddBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -94,7 +95,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     }
 
     private val getPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             if (allPermissionsGranted()) startCamera()
             else Toast.makeText(requireContext(), R.string.camera_access_denied, Toast.LENGTH_SHORT)
                 .show()
@@ -107,12 +108,16 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private fun allPermissionsGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
+            REQUIRED_PERMISSION[0]
+        ) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    REQUIRED_PERMISSION[1]
+                ) == PackageManager.PERMISSION_GRANTED
     }
 
     companion object {
-        const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private val REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
         const val CAMERA_KEY = "camera_key"
         const val START_CAMERA = "start_camera"
     }

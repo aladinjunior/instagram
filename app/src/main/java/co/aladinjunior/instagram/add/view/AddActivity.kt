@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.add.Add
-import co.aladinjunior.instagram.add.view.CameraFragment.Companion.URI
+import co.aladinjunior.instagram.post.view.CameraFragment.Companion.URI
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.ActivityAddBinding
 import java.lang.IllegalStateException

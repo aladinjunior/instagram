@@ -1,6 +1,5 @@
-package co.aladinjunior.instagram.add.view
+package co.aladinjunior.instagram.post.view
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -19,8 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import co.aladinjunior.instagram.R
-import co.aladinjunior.instagram.add.view.AddFragment.Companion.CAMERA_KEY
-import co.aladinjunior.instagram.add.view.AddFragment.Companion.START_CAMERA
+import co.aladinjunior.instagram.post.view.AddFragment.Companion.CAMERA_KEY
+import co.aladinjunior.instagram.post.view.AddFragment.Companion.START_CAMERA
 import co.aladinjunior.instagram.commom.util.Files
 
 

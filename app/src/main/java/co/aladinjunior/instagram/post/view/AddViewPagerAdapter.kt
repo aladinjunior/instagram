@@ -1,4 +1,4 @@
-package co.aladinjunior.instagram.add.view
+package co.aladinjunior.instagram.post.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
