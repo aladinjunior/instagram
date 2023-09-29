@@ -7,7 +7,7 @@ import co.aladinjunior.instagram.post.data.PostRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class PostPresenter(
+class GalleryPresenter(
     var view: Post.View?,
     private val repository: PostRepository
 ) : Post.Presenter, CoroutineScope {

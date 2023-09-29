@@ -5,11 +5,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentGalleryBinding
 import co.aladinjunior.instagram.post.Post
 import co.aladinjunior.instagram.post.data.PostLocalDataSource
 import co.aladinjunior.instagram.post.data.PostRepository
-import co.aladinjunior.instagram.post.presentation.PostPresenter
+import co.aladinjunior.instagram.post.presentation.GalleryPresenter
 
 class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
     R.layout.fragment_gallery,
@@ -21,7 +22,7 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
 
 
     override fun setupPresenter() {
-        presenter = PostPresenter(this, PostRepository(PostLocalDataSource(requireContext())))
+        presenter = DependencyInjector.galleryPresenter(this, DependencyInjector.postRepository(requireContext()))
     }
 
     override fun setupViews() {
@@ -42,8 +43,19 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, Post.Presenter>(
 
     override fun loadAllPics(pictures: List<Uri>) {
         binding?.galleryScrolling?.smoothScrollTo(0,0)
-        binding?.galleryImgSelected?.setImageURI(pictures.first())
+        binding?.galleryImgSelected?.setImageURI(pictures.firstOrNull())
         adapter.items = pictures
         adapter.notifyDataSetChanged()
+    }
+
+
+    override fun onResume() {
+        presenter.fetchPics()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        presenter.onDestroy()
+        super.onPause()
     }
 }
