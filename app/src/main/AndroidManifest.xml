@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram">
-        <activity android:name=".add.view.AddActivity"></activity>
+        <activity android:name=".add.view.AddActivity"/>
         <activity
             android:name=".splash.view.SplashActivity"
             android:exported="true">
@@ -34,7 +34,11 @@
         </activity>
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".register.view.RegisterActivity" />
-        <activity android:name=".main.view.MainActivity" />
+        <activity android:name=".main.view.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

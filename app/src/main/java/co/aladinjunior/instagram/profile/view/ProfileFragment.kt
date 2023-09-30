@@ -1,8 +1,10 @@
 package co.aladinjunior.instagram.profile.view
 
 
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
 import co.aladinjunior.instagram.commom.model.Post
@@ -10,11 +12,12 @@ import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentProfileBinding
 import co.aladinjunior.instagram.profile.Profile
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     R.layout.fragment_profile,
     FragmentProfileBinding::bind
-), Profile.View {
+), Profile.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     override lateinit var presenter: Profile.Presenter
     private lateinit var adapter: ProfileAdapter
@@ -25,6 +28,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileRv?.adapter = adapter
         binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
 
+        binding?.profileTopNav?.setOnNavigationItemSelectedListener(this)
 
         presenter.fetchUserProfile()
 
@@ -59,5 +63,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     override fun displayFullPosts(posts: List<Post>) {
         adapter.items = posts
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.top_nav_profile_grid -> binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
+            R.id.top_nav_profile_listed -> binding?.profileRv?.layoutManager = LinearLayoutManager(requireContext())
+        }
+        return true
     }
 }

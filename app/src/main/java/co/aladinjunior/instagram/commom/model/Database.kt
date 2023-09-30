@@ -11,15 +11,14 @@ object Database {
     val followers = hashMapOf<String, Set<String>>()
     var userSession: UserAuth? = null
 
-    const val FILE_PATHNAME = "/storage/emulated/0/Android/media/co.aladinjunior.instagram/Instagram/2023-09-28-15-31-41-866.jpg"
+    const val FILE_PATHNAME = "/sdcard/Pictures/IMG_20230930_102025.jpg"
 
 
 
     init {
 
         with(userAuth){
-            val userA = UserAuth(UUID.randomUUID().toString(),"userA", Uri.fromFile(File(
-                FILE_PATHNAME)), "userA@gmail.com", "12345678")
+            val userA = UserAuth(UUID.randomUUID().toString(),"userA", Uri.fromFile(File(FILE_PATHNAME)), "userA@gmail.com", "12345678")
             val userB = UserAuth(UUID.randomUUID().toString(),"userB", Uri.fromFile(File(FILE_PATHNAME)), "userB@gmail.com", "12345678")
 
             add(userA)
@@ -34,6 +33,7 @@ object Database {
             feeds[userB.uuid] = hashSetOf()
 
             userSession = userAuth.first()
+
         }
 
 

@@ -13,7 +13,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 
-class PicturesAdapter(private val onClick: (image: Uri) -> Unit) : RecyclerView.Adapter<PicturesAdapter.PostViewHolder>() {
+class PicturesAdapter(private val onClick: (image: Uri) -> Unit) :
+    RecyclerView.Adapter<PicturesAdapter.PostViewHolder>() {
 
     var items: List<Uri> = mutableListOf()
 
@@ -33,11 +34,13 @@ class PicturesAdapter(private val onClick: (image: Uri) -> Unit) : RecyclerView.
 
     inner class PostViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(image: Uri) {
-            val bitmap =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                 itemView.context.contentResolver.loadThumbnail(image, Size(200, 200), null)
+            val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                itemView.context.contentResolver.loadThumbnail(image, Size(200, 200), null)
             } else {
-                ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(image.toString()),
-                200, 200)
+                ThumbnailUtils.extractThumbnail(
+                    BitmapFactory.decodeFile(image.toString()),
+                    200, 200
+                )
             }
 
             itemView.findViewById<ImageView>(R.id.profile_img_photos)

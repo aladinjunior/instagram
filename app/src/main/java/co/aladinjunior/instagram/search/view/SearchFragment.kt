@@ -1,33 +1,64 @@
 package co.aladinjunior.instagram.search.view
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.databinding.FragmentSearchBinding
+import co.aladinjunior.instagram.search.Search
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
+    R.layout.fragment_search, FragmentSearchBinding::bind
+), Search.View {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+    override lateinit var presenter: Search.Presenter
+    private lateinit var adapter: SearchAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.search_rv)
-        rv.adapter = SearchAdapter()
-        rv.layoutManager = LinearLayoutManager(requireContext())
+    override fun setupPresenter() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        adapter = SearchAdapter()
+    }
+
+    override fun setupViews() {
+        binding?.searchRv?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.searchRv?.adapter = adapter
+
+
+    }
+
+    override fun getMenu(): Int {
+        return R.menu.menu_search
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_profile_toolbar, menu)
         super.onCreateOptionsMenu(menu, inflater)
+
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.menu.menu_search).actionView as SearchView
+        with(searchView){
+            apply {
+                setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return false
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return false
+                    }
+                })
+            }
+        }
+
+
+
     }
 }

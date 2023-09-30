@@ -32,6 +32,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
             itemView.findViewById<ImageView>(R.id.home_img_post).setImageURI(posts.uri)
             itemView.findViewById<TextView>(R.id.home_captions).text = posts.caption
             itemView.findViewById<TextView>(R.id.home_username).text = posts.publisher.name
+            itemView.findViewById<ImageView>(R.id.home_img_user).setImageURI(posts.publisher.photoUri)
         }
     }
 
