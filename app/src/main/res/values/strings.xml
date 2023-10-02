@@ -47,5 +47,6 @@
     <string name="existent_user">usuário existente</string>
     <string name="invalid_name">Nome precisa ter mais de 3 caracteres</string>
     <string name="camera_access_denied">Acesso a camera negado. Por favor conceda o acesso nas configurações do seu smartphone.</string>
+    <string name="user_not_found">usuário não encontrado</string>
 
 </resources>

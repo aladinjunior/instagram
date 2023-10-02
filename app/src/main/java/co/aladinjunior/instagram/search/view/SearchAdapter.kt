@@ -4,10 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
+import co.aladinjunior.instagram.commom.model.UserAuth
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ProfileViewHolder>() {
+
+    var items: List<UserAuth> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
         return ProfileViewHolder(
@@ -16,17 +20,19 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ProfileViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ProfileViewHolder, position: Int) {
-        holder.bind(R.drawable.ic_insta_add)
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return items.size
     }
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind(image: Int){
+        fun bind(users: UserAuth){
             itemView.findViewById<ImageView>(R.id.search_img_user)
-                .setImageResource(image)
+                .setImageURI(users.photoUri)
+            itemView.findViewById<TextView>(R.id.search_text_user)
+                .text = users.name
         }
     }
 

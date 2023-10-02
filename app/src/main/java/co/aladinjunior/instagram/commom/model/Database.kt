@@ -11,7 +11,7 @@ object Database {
     val followers = hashMapOf<String, Set<String>>()
     var userSession: UserAuth? = null
 
-    const val FILE_PATHNAME = "/sdcard/Pictures/IMG_20230930_102025.jpg"
+    private const val FILE_PATHNAME = "/sdcard/Pictures/IMG_20230930_102025.jpg"
 
 
 
@@ -34,6 +34,12 @@ object Database {
 
             userSession = userAuth.first()
 
+            for (i in 0..30){
+                val users = UserAuth(UUID.randomUUID().toString(), "user$i", null, "user$i@gmail.com", "123123123")
+
+                userAuth.add(users)
+
+            }
         }
 
 

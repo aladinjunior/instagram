@@ -4,10 +4,13 @@ import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.commom.model.UserAuth
+import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentSearchBinding
 import co.aladinjunior.instagram.search.Search
 
@@ -20,6 +23,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
     private lateinit var adapter: SearchAdapter
 
     override fun setupPresenter() {
+
+        presenter = DependencyInjector.searchPresenter(this, DependencyInjector.searchRepository())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +37,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
         binding?.searchRv?.adapter = adapter
 
 
+
     }
 
     override fun getMenu(): Int {
@@ -42,7 +48,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
         super.onCreateOptionsMenu(menu, inflater)
 
         val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.menu.menu_search).actionView as SearchView
+        val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
         with(searchView){
             apply {
                 setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
@@ -52,6 +58,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
+                        if (newText?.isNotEmpty() == true){
+                            presenter.fetchUsers(newText)
+                            return true
+                        }
                         return false
                     }
                 })
@@ -60,5 +70,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
 
 
 
+    }
+
+    override fun displayUsers(user: List<UserAuth>) {
+        binding?.searchEmptyUsers?.visibility = View.GONE
+        binding?.searchRv?.visibility = View.VISIBLE
+        adapter.items = user
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun displayEmptyUsers(message: String) {
+        binding?.searchEmptyUsers?.visibility = View.VISIBLE
+        binding?.searchRv?.visibility = View.GONE
+        binding?.searchEmptyUsers?.text = message
     }
 }

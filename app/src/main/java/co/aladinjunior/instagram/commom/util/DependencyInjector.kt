@@ -31,6 +31,10 @@ import co.aladinjunior.instagram.register.data.RegisterRepository
 import co.aladinjunior.instagram.register.presentation.RegisterEmailPresenter
 import co.aladinjunior.instagram.register.presentation.RegisterNamePasswordPresenter
 import co.aladinjunior.instagram.register.presentation.RegisterPhotoUploadPresenter
+import co.aladinjunior.instagram.search.Search
+import co.aladinjunior.instagram.search.data.SearchFakeRemoteDataSource
+import co.aladinjunior.instagram.search.data.SearchRepository
+import co.aladinjunior.instagram.search.presentation.SearchPresenter
 import co.aladinjunior.instagram.splash.Splash
 import co.aladinjunior.instagram.splash.data.FakeSplashRequest
 import co.aladinjunior.instagram.splash.data.SplashRepository
@@ -89,5 +93,11 @@ object DependencyInjector {
         return PostRepository(PostLocalDataSource(context))
     }
 
+    fun searchPresenter(view: Search.View, repository: SearchRepository) : SearchPresenter {
+        return SearchPresenter(view, repository)
+    }
+    fun searchRepository() : SearchRepository{
+        return SearchRepository(SearchFakeRemoteDataSource())
+    }
 
 }
