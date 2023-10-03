@@ -2,7 +2,6 @@ package co.aladinjunior.instagram.search.view
 
 import android.app.SearchManager
 import android.content.Context
-import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 
@@ -19,24 +18,35 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
     R.layout.fragment_search, FragmentSearchBinding::bind
 ), Search.View {
 
+
     override lateinit var presenter: Search.Presenter
-    private lateinit var adapter: SearchAdapter
+    private val adapter by lazy {SearchAdapter(onItemClick)}
+    private var searchListener: SearchListener? = null
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is SearchListener){
+            searchListener = context
+        }
+    }
+
 
     override fun setupPresenter() {
-
         presenter = DependencyInjector.searchPresenter(this, DependencyInjector.searchRepository())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        adapter = SearchAdapter()
-    }
+
 
     override fun setupViews() {
         binding?.searchRv?.layoutManager = LinearLayoutManager(requireContext())
         binding?.searchRv?.adapter = adapter
 
 
+
+    }
+    private val onItemClick : (String) -> Unit = {uuid ->
+        searchListener?.goToSearchedProfile(uuid)
 
     }
 
@@ -79,9 +89,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
         adapter.notifyDataSetChanged()
     }
 
-    override fun displayEmptyUsers(message: String) {
+    override fun displayEmptyUsers() {
         binding?.searchEmptyUsers?.visibility = View.VISIBLE
         binding?.searchRv?.visibility = View.GONE
-        binding?.searchEmptyUsers?.text = message
+    }
+
+    interface SearchListener{
+        fun goToSearchedProfile(uuid: String)
     }
 }

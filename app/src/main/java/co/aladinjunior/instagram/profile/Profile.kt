@@ -7,8 +7,8 @@ import co.aladinjunior.instagram.commom.model.UserAuth
 
 interface Profile {
     interface Presenter : BasePresenter{
-        fun fetchUserProfile()
-        fun fetchUserPosts()
+        fun fetchUserProfile(uuid: String?)
+        fun fetchUserPosts(uuid: String?)
         fun clearCache()
     }
     interface View : BaseView<Presenter> {

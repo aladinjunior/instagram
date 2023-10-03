@@ -11,13 +11,18 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         localDataSource.post(null)
     }
 
-    fun fetchUserProfile(callback: BaseCallback<UserAuth>){
+    fun fetchUserProfile(uuid: String?, callback: BaseCallback<UserAuth>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
-        val userAuth = localDataSource.fetchUserSession()
-        val dataSource = dataSourceFactory.createFromUser()
-        dataSource.fetchUserProfile(userAuth.uuid, object : BaseCallback<UserAuth>{
+        val userID = uuid ?: localDataSource.fetchUserSession().uuid
+        val dataSource = dataSourceFactory.createFromUser(uuid)
+
+        dataSource.fetchUserProfile(userID, object : BaseCallback<UserAuth>{
             override fun onSuccess(data: UserAuth) {
-                localDataSource.putUser(data)
+                if (uuid == null){
+                    localDataSource.putUser(data)
+
+                }
+
                 callback.onSuccess(data)
             }
 
@@ -27,13 +32,16 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         })
     }
 
-    fun fetchUserPosts(callback: BaseCallback<List<Post>>){
+    fun fetchUserPosts(uuid: String?, callback: BaseCallback<List<Post>>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
-        val userAuth = localDataSource.fetchUserSession()
-        val dataSource = dataSourceFactory.createFromPosts()
-        dataSource.fetchUserPosts(userAuth.uuid, object : BaseCallback<List<Post>>{
+        val userID = uuid ?: localDataSource.fetchUserSession().uuid
+        val dataSource = dataSourceFactory.createFromPosts(uuid)
+        dataSource.fetchUserPosts(userID, object : BaseCallback<List<Post>>{
             override fun onSuccess(data: List<Post>) {
-                localDataSource.post(data)
+                if (uuid == null){
+                    localDataSource.post(data)
+                }
+
                 callback.onSuccess(data)
             }
 

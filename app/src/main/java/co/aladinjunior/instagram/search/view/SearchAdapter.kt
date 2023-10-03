@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.model.UserAuth
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ProfileViewHolder>() {
+class SearchAdapter(private val onItemClick: (String) -> Unit) : RecyclerView.Adapter<SearchAdapter.ProfileViewHolder>() {
 
     var items: List<UserAuth> = mutableListOf()
 
@@ -33,6 +33,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ProfileViewHolder>() {
                 .setImageURI(users.photoUri)
             itemView.findViewById<TextView>(R.id.search_text_user)
                 .text = users.name
+            itemView.setOnClickListener {
+                onItemClick(users.uuid)
+            }
         }
     }
 

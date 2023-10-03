@@ -16,7 +16,6 @@ class SearchFakeRemoteDataSource : SearchDataSource {
                 .startsWith(name.lowercase()) && it.uuid != Database.userSession!!.uuid
         }
 
-        if (users.isEmpty()) callback.onFailure("usuario nao encontrado")
 
 
         callback.onSuccess(users.toList())

@@ -11,6 +11,6 @@ interface Search {
     }
     interface View: BaseView<Presenter>{
         fun displayUsers(user: List<UserAuth>)
-        fun displayEmptyUsers(message: String)
+        fun displayEmptyUsers()
     }
 }

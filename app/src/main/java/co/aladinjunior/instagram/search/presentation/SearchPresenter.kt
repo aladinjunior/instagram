@@ -13,11 +13,12 @@ class SearchPresenter(
     override fun fetchUsers(name: String) {
         repository.fetchUsers(name, object : BaseCallback<List<UserAuth>>{
             override fun onSuccess(data: List<UserAuth>) {
-                 view?.displayUsers(data)
+                if(data.isEmpty()) view?.displayEmptyUsers()
+                else view?.displayUsers(data)
             }
 
             override fun onFailure(message: String) {
-                view?.displayEmptyUsers(message)
+                view?.displayEmptyUsers()
             }
         })
     }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.post.view.AddFragment
@@ -16,7 +17,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener, SearchFragment.SearchListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeFragment: HomeFragment
@@ -62,6 +63,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainAppbar.layoutParams = coordinatorParams
     }
 
+    override fun goToSearchedProfile(uuid: String) {
+        val fragment = ProfileFragment()
+        fragment.arguments = bundleOf(USER_ID_KEY to uuid)
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.main_fragment, fragment, fragment.javaClass.simpleName + "detail")
+            addToBackStack(null)
+            commit()
+        }
+    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var scrollingToolbar = false
@@ -92,5 +102,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
         binding.mainBottomNav.selectedItemId = R.id.bottom_nav_home
+    }
+
+    companion object{
+        const val USER_ID_KEY = "user_id_key"
     }
 }

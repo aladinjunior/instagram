@@ -11,6 +11,7 @@ import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentProfileBinding
+import co.aladinjunior.instagram.main.view.MainActivity.Companion.USER_ID_KEY
 import co.aladinjunior.instagram.profile.Profile
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -21,16 +22,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
     override lateinit var presenter: Profile.Presenter
     private lateinit var adapter: ProfileAdapter
+    private var uuid: String? = null
 
 
     override fun setupViews() {
+        uuid = arguments?.getString(USER_ID_KEY)
         adapter = ProfileAdapter()
         binding?.profileRv?.adapter = adapter
         binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
 
         binding?.profileTopNav?.setOnNavigationItemSelectedListener(this)
 
-        presenter.fetchUserProfile()
+        presenter.fetchUserProfile(uuid)
 
     }
 
@@ -53,7 +56,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileTextBio?.text = "TODO"
         binding?.profileImgIcon?.setImageURI(userAuth.photoUri)
 
-        presenter.fetchUserPosts()
+        presenter.fetchUserPosts(uuid)
     }
 
     override fun displayRequestFailure(message: String) {

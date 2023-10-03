@@ -15,8 +15,8 @@ class ProfilePresenter(
         repository.clear()
     }
 
-    override fun fetchUserProfile() {
-        repository.fetchUserProfile(object : BaseCallback<UserAuth>{
+    override fun fetchUserProfile(uuid: String?) {
+        repository.fetchUserProfile(uuid, object : BaseCallback<UserAuth>{
             override fun onSuccess(data: UserAuth) {
                 view?.displayUserProfile(data)
             }
@@ -26,8 +26,9 @@ class ProfilePresenter(
             }
         })
     }
-    override fun fetchUserPosts() {
-        repository.fetchUserPosts(object : BaseCallback<List<Post>> {
+
+    override fun fetchUserPosts(uuid: String?) {
+        repository.fetchUserPosts(uuid, object : BaseCallback<List<Post>> {
             override fun onSuccess(data: List<Post>) {
                 if (data.isEmpty()) {
                     view?.displayRequestFailure("não há postagens disponiveis")
