@@ -8,7 +8,7 @@ object Database {
     val userAuth = mutableListOf<UserAuth>()
     val posts = hashMapOf<String, MutableSet<Post>>()
     val feeds = hashMapOf<String, MutableSet<Post>>()
-    val followers = hashMapOf<String, Set<String>>()
+    val followers = hashMapOf<String, MutableSet<String>>()
     var userSession: UserAuth? = null
 
     private const val FILE_PATHNAME = "/sdcard/Pictures/IMG_20230930_102025.jpg"
@@ -43,6 +43,7 @@ object Database {
 
 
         userSession = userAuth.first()
+        followers[userSession!!.uuid]?.add(userAuth[2].uuid)
 
     }
 

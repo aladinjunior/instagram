@@ -16,8 +16,8 @@ class ProfilePresenter(
     }
 
     override fun fetchUserProfile(uuid: String?) {
-        repository.fetchUserProfile(uuid, object : BaseCallback<UserAuth>{
-            override fun onSuccess(data: UserAuth) {
+        repository.fetchUserProfile(uuid, object : BaseCallback<Pair<UserAuth, Boolean?>>{
+            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
                 view?.displayUserProfile(data)
             }
 

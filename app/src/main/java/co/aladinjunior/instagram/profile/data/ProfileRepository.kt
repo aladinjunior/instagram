@@ -11,13 +11,13 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         localDataSource.post(null)
     }
 
-    fun fetchUserProfile(uuid: String?, callback: BaseCallback<UserAuth>){
+    fun fetchUserProfile(uuid: String?, callback: BaseCallback<Pair<UserAuth, Boolean?>>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
         val userID = uuid ?: localDataSource.fetchUserSession().uuid
         val dataSource = dataSourceFactory.createFromUser(uuid)
 
-        dataSource.fetchUserProfile(userID, object : BaseCallback<UserAuth>{
-            override fun onSuccess(data: UserAuth) {
+        dataSource.fetchUserProfile(userID, object : BaseCallback<Pair<UserAuth, Boolean?>>{
+            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
                 if (uuid == null){
                     localDataSource.putUser(data)
 

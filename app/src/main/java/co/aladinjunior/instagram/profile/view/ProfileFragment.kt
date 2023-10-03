@@ -48,13 +48,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
 
-    override fun displayUserProfile(userAuth: UserAuth) {
-        binding?.profilePostsCount?.text = userAuth.postCount.toString()
-        binding?.profileFollowingCount?.text = userAuth.followingCount.toString()
-        binding?.profileFollowersCount?.text = userAuth.followersCount.toString()
-        binding?.profileTextUsername?.text = userAuth.name
+    override fun displayUserProfile(userAuth: Pair<UserAuth, Boolean?>) {
+        val (user, following) = userAuth
+
+        binding?.profilePostsCount?.text = user.postCount.toString()
+        binding?.profileFollowingCount?.text = user.followingCount.toString()
+        binding?.profileFollowersCount?.text = user.followersCount.toString()
+        binding?.profileTextUsername?.text = user.name
         binding?.profileTextBio?.text = "TODO"
-        binding?.profileImgIcon?.setImageURI(userAuth.photoUri)
+        binding?.profileImgIcon?.setImageURI(user.photoUri)
+
+        binding?.profileBttnEditProfile?.text = when(following) {
+            null -> getString(R.string.edit_profile)
+            true -> getString(R.string.unfollow)
+            false -> getString(R.string.follow)
+        }
 
         presenter.fetchUserPosts(uuid)
     }

@@ -5,7 +5,7 @@ import co.aladinjunior.instagram.commom.model.Post
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 class ProfileDataSourceFactory(
-    private val profileCache: Cache<UserAuth>,
+    private val profileCache: Cache<Pair<UserAuth, Boolean?>>,
     private val postsProfileCache: Cache<List<Post>>,
 ) {
 

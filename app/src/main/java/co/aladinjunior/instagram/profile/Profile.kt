@@ -12,7 +12,7 @@ interface Profile {
         fun clearCache()
     }
     interface View : BaseView<Presenter> {
-        fun displayUserProfile(userAuth: UserAuth)
+        fun displayUserProfile(userAuth: Pair<UserAuth, Boolean?>)
         fun displayRequestFailure(message: String)
         fun displayFullPosts(posts: List<Post>)
 

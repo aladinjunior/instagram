@@ -9,10 +9,10 @@ import java.lang.IllegalStateException
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
-    private val profileCache: Cache<UserAuth>,
+    private val profileCache: Cache<Pair<UserAuth, Boolean?>>,
     private val postsProfileCache: Cache<List<Post>>
 ) : ProfileDataSource{
-    override fun fetchUserProfile(userUuid: String, callback: BaseCallback<UserAuth>) {
+    override fun fetchUserProfile(userUuid: String, callback: BaseCallback<Pair<UserAuth, Boolean?>>) {
 
         val userAuth = profileCache.get(userUuid)
         if (userAuth != null){
@@ -35,7 +35,7 @@ class ProfileLocalDataSource(
         return Database.userSession ?: throw RuntimeException("usuário não logado")
     }
 
-    override fun putUser(data: UserAuth) {
+    override fun putUser(data: Pair<UserAuth, Boolean?>) {
         profileCache.put(data)
     }
 
