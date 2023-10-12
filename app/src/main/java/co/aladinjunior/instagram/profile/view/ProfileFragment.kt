@@ -33,6 +33,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
         binding?.profileTopNav?.setOnNavigationItemSelectedListener(this)
 
+        binding?.profileBttnEditProfile?.setOnClickListener {
+            if (it.tag == true){
+                binding?.profileBttnEditProfile?.text = getString(R.string.follow)
+                binding?.profileBttnEditProfile?.tag = false
+                presenter.followUser(uuid!!, false)
+            } else if (it.tag == false){
+                binding?.profileBttnEditProfile?.text = getString(R.string.unfollow)
+                binding?.profileBttnEditProfile?.tag = true
+                presenter.followUser(uuid!!, true)
+
+            }
+        }
+
         presenter.fetchUserProfile(uuid)
 
     }
@@ -63,6 +76,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
             true -> getString(R.string.unfollow)
             false -> getString(R.string.follow)
         }
+
+        binding?.profileBttnEditProfile?.tag = following
 
         presenter.fetchUserPosts(uuid)
     }

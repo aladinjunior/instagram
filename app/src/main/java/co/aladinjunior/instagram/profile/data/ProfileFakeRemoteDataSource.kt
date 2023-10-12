@@ -21,7 +21,6 @@ class ProfileFakeRemoteDataSource : ProfileDataSource {
                     val destUser = following?.firstOrNull{ it == userUuid}
                     callback.onSuccess(Pair(userAuth, destUser != null))
 
-
                 }
             }
             else callback.onFailure("usuário não encontrado")
@@ -35,6 +34,19 @@ class ProfileFakeRemoteDataSource : ProfileDataSource {
             val posts = Database.posts[userUuid]
             callback.onSuccess(posts?.toList() ?: emptyList())
         }, 2000)
+    }
+
+    override fun followUser(userUuid: String, isFollow: Boolean, callback: BaseCallback<Boolean>) {
+        var followers = Database.followers[Database.userSession?.uuid]
+        if(followers == null){
+            followers = mutableSetOf()
+            Database.followers[Database.userSession!!.uuid] = followers
+        }
+        if (isFollow){
+            Database.followers[Database.userSession!!.uuid]?.add(userUuid)
+        } else Database.followers[Database.userSession!!.uuid]?.remove(userUuid)
+
+        callback.onSuccess(true)
     }
 
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "912670604110",
+    "project_id": "instagram-f1603",
+    "storage_bucket": "instagram-f1603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912670604110:android:236b25f4d43a965f597c1f",
+        "android_client_info": {
+          "package_name": "co.aladinjunior.instagram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPGzbdIYEoZJ5NBIiltgut_R_oL9G7QZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,10 @@ class ProfileDataSourceFactory(
     private val postsProfileCache: Cache<List<Post>>,
 ) {
 
+    fun createRemoteDataSource() : ProfileDataSource{
+        return ProfileFakeRemoteDataSource()
+    }
+
     fun createLocalDataSource() : ProfileDataSource{
         return ProfileLocalDataSource(profileCache, postsProfileCache)
     }
