@@ -42,8 +42,8 @@ object Database {
         }
 
 
-        userSession = userAuth.first()
-        followers[userSession!!.uuid]?.add(userAuth[2].uuid)
+//        userSession = userAuth.first()
+//        followers[userSession!!.uuid]?.add(userAuth[2].uuid)
 
     }
 

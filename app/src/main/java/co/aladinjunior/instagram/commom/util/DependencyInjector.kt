@@ -27,6 +27,7 @@ import co.aladinjunior.instagram.register.RegisterEmail
 import co.aladinjunior.instagram.register.RegisterNamePassword
 import co.aladinjunior.instagram.register.RegisterPhotoUpload
 import co.aladinjunior.instagram.register.data.FakeRegisterDataSource
+import co.aladinjunior.instagram.register.data.FireRegisterDataSource
 import co.aladinjunior.instagram.register.data.RegisterRepository
 import co.aladinjunior.instagram.register.presentation.RegisterEmailPresenter
 import co.aladinjunior.instagram.register.presentation.RegisterNamePasswordPresenter
@@ -49,7 +50,7 @@ object DependencyInjector {
     }
 
     fun registerRepository() : RegisterRepository{
-        return RegisterRepository(FakeRegisterDataSource())
+        return RegisterRepository(FireRegisterDataSource())
     }
     fun registerEmailPresenter(view: RegisterEmail.View, repository: RegisterRepository) : RegisterEmail.Presenter{
         return RegisterEmailPresenter(view, repository)
