@@ -39,6 +39,7 @@ import co.aladinjunior.instagram.search.data.SearchRepository
 import co.aladinjunior.instagram.search.presentation.SearchPresenter
 import co.aladinjunior.instagram.splash.Splash
 import co.aladinjunior.instagram.splash.data.FakeSplashRequest
+import co.aladinjunior.instagram.splash.data.FireSplashRequest
 import co.aladinjunior.instagram.splash.data.SplashRepository
 import co.aladinjunior.instagram.splash.presentation.SplashPresenter
 
@@ -68,7 +69,7 @@ object DependencyInjector {
         return SplashPresenter(view, repository)
     }
     fun splashRepository() : SplashRepository{
-        return SplashRepository(FakeSplashRequest())
+        return SplashRepository(FireSplashRequest())
     }
     fun profilePresenter(view: Profile.View, repository: ProfileRepository) : Profile.Presenter{
         return ProfilePresenter(view, repository)
