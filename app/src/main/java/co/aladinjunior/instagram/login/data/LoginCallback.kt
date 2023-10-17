@@ -4,7 +4,7 @@ import co.aladinjunior.instagram.commom.model.UserAuth
 
 interface LoginCallback {
 
-    fun onSuccess(userAuth: UserAuth)
+    fun onSuccess()
     fun onFailure(message: String)
     fun onComplete()
 

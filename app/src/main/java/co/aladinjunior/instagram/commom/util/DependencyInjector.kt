@@ -13,6 +13,7 @@ import co.aladinjunior.instagram.home.data.HomeRepository
 import co.aladinjunior.instagram.home.presentation.HomePresenter
 import co.aladinjunior.instagram.login.Login
 import co.aladinjunior.instagram.login.data.FakeLoginRequest
+import co.aladinjunior.instagram.login.data.FireLoginRequest
 import co.aladinjunior.instagram.login.data.LoginRepository
 import co.aladinjunior.instagram.login.presentation.LoginPresenter
 import co.aladinjunior.instagram.post.Post
@@ -43,7 +44,7 @@ import co.aladinjunior.instagram.splash.presentation.SplashPresenter
 
 object DependencyInjector {
     fun loginRepository() : LoginRepository{
-        return LoginRepository(FakeLoginRequest())
+        return LoginRepository(FireLoginRequest())
     }
     fun loginPresenter(view: Login.View, repository: LoginRepository) : Login.Presenter{
         return LoginPresenter(view, repository)

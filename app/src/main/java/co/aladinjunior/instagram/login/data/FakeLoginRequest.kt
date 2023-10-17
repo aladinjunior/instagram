@@ -19,7 +19,7 @@ class FakeLoginRequest : LoginDataSource {
                 userAuth == null -> callback.onFailure("usuário não encontrado")
                 userAuth.password != password -> callback.onFailure("senha inválida")
                 else -> {
-                    callback.onSuccess(userAuth)
+                    callback.onSuccess()
                     Database.userSession = userAuth
                 }
             }
