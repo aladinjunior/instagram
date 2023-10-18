@@ -19,30 +19,30 @@ object Database {
 
         with(userAuth){
             val userA = UserAuth(UUID.randomUUID().toString(),"userA", Uri.fromFile(File(FILE_PATHNAME)), "userA@gmail.com", "12345678")
-            val userB = UserAuth(UUID.randomUUID().toString(),"userB", Uri.fromFile(File(FILE_PATHNAME)), "userB@gmail.com", "12345678")
-
+//            val userB = UserAuth(UUID.randomUUID().toString(),"userB", Uri.fromFile(File(FILE_PATHNAME)), "userB@gmail.com", "12345678")
+//
             add(userA)
-            add(userB)
-
-            followers[userA.uuid] = hashSetOf()
-            posts[userA.uuid] = hashSetOf()
-            feeds[userA.uuid] = hashSetOf()
-
-            followers[userB.uuid] = hashSetOf()
-            posts[userB.uuid] = hashSetOf()
-            feeds[userB.uuid] = hashSetOf()
-
-
-            for (i in 0..30){
-                val users = UserAuth(UUID.randomUUID().toString(), "user$i", null, "user$i@gmail.com", "123123123")
-
-                userAuth.add(users)
-
+//            add(userB)
+//
+//            followers[userA.uuid] = hashSetOf()
+//            posts[userA.uuid] = hashSetOf()
+//            feeds[userA.uuid] = hashSetOf()
+//
+//            followers[userB.uuid] = hashSetOf()
+//            posts[userB.uuid] = hashSetOf()
+//            feeds[userB.uuid] = hashSetOf()
+//
+//
+//            for (i in 0..30){
+//                val users = UserAuth(UUID.randomUUID().toString(), "user$i", null, "user$i@gmail.com", "123123123")
+//
+//                userAuth.add(users)
+//
             }
-        }
+//        }
 
 
-//        userSession = userAuth.first()
+        userSession = userAuth.first()
 //        followers[userSession!!.uuid]?.add(userAuth[2].uuid)
 
     }
