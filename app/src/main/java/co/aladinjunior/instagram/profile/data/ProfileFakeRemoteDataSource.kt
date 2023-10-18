@@ -5,21 +5,22 @@ import android.os.Looper
 import co.aladinjunior.instagram.commom.base.BaseCallback
 import co.aladinjunior.instagram.commom.model.Database
 import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 class ProfileFakeRemoteDataSource : ProfileDataSource {
 
-    override fun fetchUserProfile(userUuid: String, callback: BaseCallback<Pair<UserAuth, Boolean?>>) {
+    override fun fetchUserProfile(userUuid: String, callback: BaseCallback<Pair<User, Boolean?>>) {
         Handler(Looper.getMainLooper()).postDelayed({
             val userAuth = Database.userAuth.firstOrNull { userUuid == it.uuid }
             if (userAuth != null) {
                 if (userAuth == Database.userSession){
-                    callback.onSuccess(Pair(userAuth, null))
+                //TODO: remover essa classe callback.onSuccess(Pair(userAuth, null))
                 } else {
                     val following = Database.followers[Database.userSession?.uuid]
 
                     val destUser = following?.firstOrNull{ it == userUuid}
-                    callback.onSuccess(Pair(userAuth, destUser != null))
+                //TODO: remover essa classe callback.onSuccess(Pair(userAuth, destUser != null))
 
                 }
             }

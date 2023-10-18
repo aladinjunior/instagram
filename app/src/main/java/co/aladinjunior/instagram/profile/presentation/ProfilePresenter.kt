@@ -2,6 +2,7 @@ package co.aladinjunior.instagram.profile.presentation
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
 import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.profile.Profile
 import co.aladinjunior.instagram.profile.data.ProfileRepository
@@ -24,8 +25,8 @@ class ProfilePresenter(
     }
 
     override fun fetchUserProfile(uuid: String?) {
-        repository.fetchUserProfile(uuid, object : BaseCallback<Pair<UserAuth, Boolean?>>{
-            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
+        repository.fetchUserProfile(uuid, object : BaseCallback<Pair<User, Boolean?>>{
+            override fun onSuccess(data: Pair<User, Boolean?>) {
                 view?.displayUserProfile(data)
             }
 

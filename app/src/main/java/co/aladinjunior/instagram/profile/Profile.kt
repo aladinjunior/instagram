@@ -3,6 +3,7 @@ package co.aladinjunior.instagram.profile
 import co.aladinjunior.instagram.commom.base.BasePresenter
 import co.aladinjunior.instagram.commom.base.BaseView
 import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 interface Profile {
@@ -13,7 +14,7 @@ interface Profile {
         fun clearCache()
     }
     interface View : BaseView<Presenter> {
-        fun displayUserProfile(userAuth: Pair<UserAuth, Boolean?>)
+        fun displayUserProfile(userAuth: Pair<User, Boolean?>)
         fun displayRequestFailure(message: String)
         fun displayFullPosts(posts: List<Post>)
 

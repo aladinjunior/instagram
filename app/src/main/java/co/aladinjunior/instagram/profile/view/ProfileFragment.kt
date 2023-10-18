@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
 import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentProfileBinding
 import co.aladinjunior.instagram.main.view.MainActivity.Companion.USER_ID_KEY
 import co.aladinjunior.instagram.profile.Profile
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
@@ -61,15 +63,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
 
-    override fun displayUserProfile(userAuth: Pair<UserAuth, Boolean?>) {
+    override fun displayUserProfile(userAuth: Pair<User, Boolean?>) {
         val (user, following) = userAuth
 
-        binding?.profilePostsCount?.text = user.postCount.toString()
-        binding?.profileFollowingCount?.text = user.followingCount.toString()
-        binding?.profileFollowersCount?.text = user.followersCount.toString()
+        binding?.profilePostsCount?.text = user.posts.toString()
+        binding?.profileFollowingCount?.text = user.following.toString()
+        binding?.profileFollowersCount?.text = user.followers.toString()
         binding?.profileTextUsername?.text = user.name
         binding?.profileTextBio?.text = "TODO"
-        binding?.profileImgIcon?.setImageURI(user.photoUri)
+        binding?.let{
+            Glide.with(requireContext()).load(user.photoUrl).into(it.profileImgIcon)
+
+        }
+
+
+
+
 
         binding?.profileBttnEditProfile?.text = when(following) {
             null -> getString(R.string.edit_profile)

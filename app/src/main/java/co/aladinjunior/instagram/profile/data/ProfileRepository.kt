@@ -2,6 +2,7 @@ package co.aladinjunior.instagram.profile.data
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
 import co.aladinjunior.instagram.commom.model.Post
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory) {
@@ -11,13 +12,13 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         localDataSource.post(null)
     }
 
-    fun fetchUserProfile(uuid: String?, callback: BaseCallback<Pair<UserAuth, Boolean?>>){
+    fun fetchUserProfile(uuid: String?, callback: BaseCallback<Pair<User, Boolean?>>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
-        val userID = uuid ?: localDataSource.fetchUserSession().uuid
+        val userID = uuid ?: localDataSource.fetchUserSession()
         val dataSource = dataSourceFactory.createFromUser(uuid)
 
-        dataSource.fetchUserProfile(userID, object : BaseCallback<Pair<UserAuth, Boolean?>>{
-            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
+        dataSource.fetchUserProfile(userID, object : BaseCallback<Pair<User, Boolean?>>{
+            override fun onSuccess(data: Pair<User, Boolean?>) {
                 if (uuid == null){
                     localDataSource.putUser(data)
 
@@ -34,7 +35,7 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
 
     fun fetchUserPosts(uuid: String?, callback: BaseCallback<List<Post>>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
-        val userID = uuid ?: localDataSource.fetchUserSession().uuid
+        val userID = uuid ?: localDataSource.fetchUserSession()
         val dataSource = dataSourceFactory.createFromPosts(uuid)
         dataSource.fetchUserPosts(userID, object : BaseCallback<List<Post>>{
             override fun onSuccess(data: List<Post>) {
@@ -53,7 +54,7 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
 
     fun followUser(uuid: String?, following: Boolean, callback: BaseCallback<Boolean>){
         val dataSource = dataSourceFactory.createRemoteDataSource()
-        val userID = uuid ?: dataSource.fetchUserSession().uuid
+        val userID = uuid ?: dataSource.fetchUserSession()
 
         dataSource.followUser(userID, following, object : BaseCallback<Boolean>{
             override fun onSuccess(data: Boolean) {
