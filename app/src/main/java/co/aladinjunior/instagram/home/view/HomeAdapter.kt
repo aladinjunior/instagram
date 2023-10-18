@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.model.Post
+import com.bumptech.glide.Glide
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
 
@@ -29,10 +30,11 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ProfileViewHolder>() {
 
     inner class ProfileViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(posts: Post){
-            itemView.findViewById<ImageView>(R.id.home_img_post).setImageURI(posts.uri)
+
+            Glide.with(itemView.context).load(posts.photoUrl).into(itemView.findViewById(R.id.home_img_post))
+            Glide.with(itemView.context).load(posts.photoUrl).into(itemView.findViewById(R.id.home_img_user))
             itemView.findViewById<TextView>(R.id.home_captions).text = posts.caption
             itemView.findViewById<TextView>(R.id.home_username).text = posts.publisher?.name
-            itemView.findViewById<ImageView>(R.id.home_img_user).setImageURI(posts.publisher.photoUri)
         }
     }
 
