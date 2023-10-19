@@ -1,6 +1,7 @@
 package co.aladinjunior.instagram.search.presentation
 
 import co.aladinjunior.instagram.commom.base.BaseCallback
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.search.Search
 import co.aladinjunior.instagram.search.data.SearchRepository
@@ -11,8 +12,8 @@ class SearchPresenter(
 ) : Search.Presenter {
 
     override fun fetchUsers(name: String) {
-        repository.fetchUsers(name, object : BaseCallback<List<UserAuth>>{
-            override fun onSuccess(data: List<UserAuth>) {
+        repository.fetchUsers(name, object : BaseCallback<List<User>>{
+            override fun onSuccess(data: List<User>) {
                 if(data.isEmpty()) view?.displayEmptyUsers()
                 else view?.displayUsers(data)
             }

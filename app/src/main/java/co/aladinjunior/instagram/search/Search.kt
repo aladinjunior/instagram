@@ -2,6 +2,7 @@ package co.aladinjunior.instagram.search
 
 import co.aladinjunior.instagram.commom.base.BasePresenter
 import co.aladinjunior.instagram.commom.base.BaseView
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 interface Search {
@@ -10,7 +11,7 @@ interface Search {
         fun fetchUsers(name: String)
     }
     interface View: BaseView<Presenter>{
-        fun displayUsers(user: List<UserAuth>)
+        fun displayUsers(user: List<User>)
         fun displayEmptyUsers()
     }
 }

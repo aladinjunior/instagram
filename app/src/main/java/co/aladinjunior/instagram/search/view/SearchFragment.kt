@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.aladinjunior.instagram.R
 import co.aladinjunior.instagram.commom.base.BaseFragment
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 import co.aladinjunior.instagram.commom.util.DependencyInjector
 import co.aladinjunior.instagram.databinding.FragmentSearchBinding
@@ -82,7 +83,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
 
     }
 
-    override fun displayUsers(user: List<UserAuth>) {
+    override fun displayUsers(user: List<User>) {
         binding?.searchEmptyUsers?.visibility = View.GONE
         binding?.searchRv?.visibility = View.VISIBLE
         adapter.items = user

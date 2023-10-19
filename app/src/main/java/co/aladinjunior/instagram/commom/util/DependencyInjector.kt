@@ -35,6 +35,7 @@ import co.aladinjunior.instagram.register.presentation.RegisterNamePasswordPrese
 import co.aladinjunior.instagram.register.presentation.RegisterPhotoUploadPresenter
 import co.aladinjunior.instagram.search.Search
 import co.aladinjunior.instagram.search.data.SearchFakeRemoteDataSource
+import co.aladinjunior.instagram.search.data.SearchFireDataSource
 import co.aladinjunior.instagram.search.data.SearchRepository
 import co.aladinjunior.instagram.search.presentation.SearchPresenter
 import co.aladinjunior.instagram.splash.Splash
@@ -100,7 +101,7 @@ object DependencyInjector {
         return SearchPresenter(view, repository)
     }
     fun searchRepository() : SearchRepository{
-        return SearchRepository(SearchFakeRemoteDataSource())
+        return SearchRepository(SearchFireDataSource())
     }
 
 }

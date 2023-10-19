@@ -4,11 +4,12 @@ import android.os.Handler
 import android.os.Looper
 import co.aladinjunior.instagram.commom.base.BaseCallback
 import co.aladinjunior.instagram.commom.model.Database
+import co.aladinjunior.instagram.commom.model.User
 import co.aladinjunior.instagram.commom.model.UserAuth
 
 class SearchFakeRemoteDataSource : SearchDataSource {
 
-    override fun fetchUsers(name: String, callback: BaseCallback<List<UserAuth>>) {
+    override fun fetchUsers(name: String, callback: BaseCallback<List<User>>) {
 
 
         val users = Database.userAuth.filter {
@@ -18,7 +19,7 @@ class SearchFakeRemoteDataSource : SearchDataSource {
 
 
 
-        callback.onSuccess(users.toList())
+       // callback.onSuccess(users.toList())
 
 
     }
