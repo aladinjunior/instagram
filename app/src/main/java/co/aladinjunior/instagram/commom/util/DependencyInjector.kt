@@ -3,6 +3,7 @@ package co.aladinjunior.instagram.commom.util
 import android.content.Context
 import co.aladinjunior.instagram.add.Add
 import co.aladinjunior.instagram.add.data.AddFakeRemoteDataSource
+import co.aladinjunior.instagram.add.data.AddFireRemoteDataSource
 import co.aladinjunior.instagram.add.data.AddLocalDataSource
 import co.aladinjunior.instagram.add.data.AddRepository
 import co.aladinjunior.instagram.add.presentation.AddPresenter
@@ -88,7 +89,7 @@ object DependencyInjector {
         return AddPresenter(view, repository)
     }
     fun addRepository() : AddRepository{
-        return AddRepository(AddFakeRemoteDataSource(), AddLocalDataSource())
+        return AddRepository(AddFireRemoteDataSource(), AddLocalDataSource())
     }
     fun galleryPresenter(view: Post.View, repository: PostRepository) : GalleryPresenter {
         return GalleryPresenter(view, repository)

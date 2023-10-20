@@ -23,9 +23,8 @@ class ProfileLocalDataSource(
     }
 
     override fun fetchUserPosts(userUuid: String, callback: BaseCallback<List<Post>>) {
-       var posts = postsProfileCache.get(userUuid)
+       val posts = postsProfileCache.get(userUuid)
         if(posts != null){
-            posts = Database.posts[userUuid]?.toList() ?: emptyList()
             callback.onSuccess(posts)
         }
         else{
@@ -34,7 +33,7 @@ class ProfileLocalDataSource(
     }
 
     override fun fetchUserSession(): String {
-        return FirebaseAuth.getInstance().uid!!
+        return FirebaseAuth.getInstance().uid ?: throw RuntimeException("usuário não logado!!!")
     }
 
     override fun putUser(data: Pair<User, Boolean?>) {

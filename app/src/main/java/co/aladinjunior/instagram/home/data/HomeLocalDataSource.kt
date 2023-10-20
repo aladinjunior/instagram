@@ -11,9 +11,8 @@ import java.lang.RuntimeException
 class HomeLocalDataSource(private val cache: Cache<List<Post>>) : HomeDataSource {
 
     override fun fetchPost(uuid: String, callback: BaseCallback<List<Post>>) {
-        var posts = cache.get(uuid)
+        val posts = cache.get(uuid)
         if (posts != null){
-            posts = Database.posts[uuid]?.toList() ?: emptyList()
             callback.onSuccess(posts)
         }
         else callback.onFailure("nao há posts no feed")

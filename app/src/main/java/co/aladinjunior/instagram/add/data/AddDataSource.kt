@@ -7,6 +7,6 @@ import java.lang.UnsupportedOperationException
 
 interface AddDataSource {
 
-    fun createPost(uuid: String, uri: Uri, captions: String, callback: BaseCallback<Boolean>) {throw UnsupportedOperationException()}
-    fun fetchSession() : UserAuth {throw UnsupportedOperationException()}
+    fun createPost(userUUID: String, uri: Uri, captions: String, callback: BaseCallback<Boolean>) {throw UnsupportedOperationException()}
+    fun fetchSession() : String {throw UnsupportedOperationException()}
 }
