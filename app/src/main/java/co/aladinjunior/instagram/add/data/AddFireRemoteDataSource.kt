@@ -53,7 +53,6 @@ class AddFireRemoteDataSource : AddDataSource {
                                 postRef.set(post)
                                     .addOnSuccessListener { resPost ->
 
-                                        // meu feed
                                         FirebaseFirestore.getInstance()
                                             .collection("/feeds")
                                             .document(userUUID)
@@ -63,26 +62,26 @@ class AddFireRemoteDataSource : AddDataSource {
                                             .addOnSuccessListener { resMyFeed ->
 
 
-                                                // feed dos meus seguidores
                                                 FirebaseFirestore.getInstance()
                                                     .collection("/followers")
                                                     .document(userUUID)
-                                                    .collection("followers")
                                                     .get()
                                                     .addOnSuccessListener { resFollowers ->
 
-                                                        val documents = resFollowers.documents
+                                                        if (resFollowers.exists()){
+                                                            val list = resFollowers.get("followers") as List<String>
 
-                                                        for (document in documents) {
-                                                            val followerUUID = document.toObject(String::class.java) ?: throw RuntimeException("Falha ao converter seguidor")
-
-                                                            FirebaseFirestore.getInstance()
-                                                                .collection("/feeds")
-                                                                .document(followerUUID)
-                                                                .collection("posts")
-                                                                .document(postRef.path)
-                                                                .set(post)
+                                                            for (followerUUID in list) {
+                                                                FirebaseFirestore.getInstance()
+                                                                    .collection("/feeds")
+                                                                    .document(followerUUID)
+                                                                    .collection("posts")
+                                                                    .document(postRef.id)
+                                                                    .set(post)
+                                                            }
                                                         }
+
+
 
                                                         callback.onSuccess(true)
 
